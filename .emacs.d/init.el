@@ -65,7 +65,7 @@
 
 (require 'swbuff)
 (global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-w" 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
 (global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
 
 ; clean up unused buffers
