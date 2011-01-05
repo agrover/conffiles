@@ -63,10 +63,10 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
-; turn on easy buffer switch
-(require 'ebs)
-(ebs-initialize)
-(global-set-key [(control tab)] 'ebs-switch-buffer)
+(require 'swbuff)
+(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-w" 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
 
 ; clean up unused buffers
 (require 'midnight)
