@@ -47,6 +47,8 @@
     (which-function-mode t)
     (hs-minor-mode t)))
 
+(setq diff-switches "-u")
+
 ; set some more gedit-like bindings
 (global-set-key "\M-w" 'kill-this-buffer)
 ;(global-set-key "\C-o" 'menu-find-file-existing)
