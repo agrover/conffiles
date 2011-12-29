@@ -59,6 +59,8 @@
 (global-set-key "\C-t" 'hs-toggle-hiding)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 
+(require 'ipython)
+
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
