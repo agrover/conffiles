@@ -44,10 +44,7 @@
 
 (add-hook 'c-mode-common-hook 
   (lambda ()
-    (which-function-mode t)))
-
-(add-hook 'c-mode-common-hook 
-  (lambda ()
+    (which-function-mode t)
     (hs-minor-mode t)))
 
 ; set some more gedit-like bindings
