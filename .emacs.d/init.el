@@ -90,9 +90,8 @@
                     (mapconcat 'isearch-text-char-description
                                string ""))
             isearch-yank-flag t)
-      )
-      ;(isearch-search-and-update)
-      ))
+      ;;(isearch-search-and-update)
+      )))
 
 (add-hook 'isearch-mode-hook 'my-isearch-yank-word-hook)
 
