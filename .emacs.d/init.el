@@ -47,6 +47,10 @@
     (which-function-mode t)
     (hs-minor-mode t)))
 
+; use python mode for Cython files
+(add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.pxd\\'" . python-mode))
+
 (setq diff-switches "-u")
 
 ; set some more gedit-like bindings
