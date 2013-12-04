@@ -100,3 +100,10 @@
 (add-hook 'isearch-mode-hook 'my-isearch-yank-word-hook)
 
 (global-set-key "\M-8" 'my-isearch-word-at-point)
+
+(defun git-grep (search)
+  "git-grep the entire current repo"
+  (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
+  (grep-find (concat "git --no-pager grep --no-color -n " search " `git rev-parse --show-toplevel`")))
+
+(global-set-key "\M-s" 'git-grep)
