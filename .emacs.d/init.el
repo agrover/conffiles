@@ -107,3 +107,5 @@
   (grep-find (concat "git --no-pager grep --no-color -n " search " `git rev-parse --show-toplevel`")))
 
 (global-set-key "\M-s" 'git-grep)
+
+(put 'downcase-region 'disabled nil)
