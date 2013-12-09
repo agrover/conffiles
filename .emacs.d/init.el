@@ -1,8 +1,8 @@
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(column-number-mode t)
  '(cua-highlight-region-shift-only t)
@@ -24,12 +24,13 @@
  '(size-indication-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tramp-mode t)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "andy@groveronline.com"))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
@@ -65,6 +66,8 @@
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+
+(require 'uniquify)
 
 (require 'swbuff)
 (global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
