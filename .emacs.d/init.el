@@ -47,6 +47,7 @@
 
 ; enable commands I use
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ; Linux mode for C
 (setq c-default-style
