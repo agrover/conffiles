@@ -39,6 +39,12 @@
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 
+(require 'package)
+(package-initialize)
+
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
 ; Linux mode for C
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
