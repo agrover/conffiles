@@ -45,6 +45,9 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
+; enable commands I use
+(put 'downcase-region 'disabled nil)
+
 ; Linux mode for C
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
@@ -117,7 +120,6 @@
 
 (global-set-key "\M-s" 'git-grep)
 
-(put 'downcase-region 'disabled nil)
 
 (defconst qemu-c-style
   '((indent-tabs-mode . nil)
