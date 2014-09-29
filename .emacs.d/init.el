@@ -128,6 +128,7 @@
 
 (global-set-key "\M-d" 'git-grep-current)
 
+; qemu style setup
 (defconst qemu-c-style
   '((indent-tabs-mode . nil)
     (c-basic-offset . 4)
