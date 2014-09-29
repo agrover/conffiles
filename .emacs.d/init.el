@@ -167,3 +167,16 @@
     (c-set-style "qemu")))
 
  (add-hook 'c-mode-hook 'maybe-qemu-style)
+
+; Flycheck for rust
+(require 'flycheck)
+(flycheck-define-checker rust
+  "A Rust syntax checker using the Rust compiler"
+  :command ("/home/agrover/rust/bin/rustc"
+            "--parse-only"
+            source)
+  :error-patterns
+  ((error line-start (file-name) ":" line ":" column ": "
+          (one-or-more digit) ":" (one-or-more digit) " error: "
+          (message) line-end))
+  :modes rust-mode)
