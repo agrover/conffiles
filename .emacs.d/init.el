@@ -116,7 +116,7 @@
 (defun git-grep (search)
   "git-grep the entire current repo"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
-  (grep-find (concat "git --no-pager grep --no-color -n " search " `git rev-parse --show-toplevel`")))
+  (grep-find (concat "git --no-pager grep --no-color -n \"" search "\" `git rev-parse --show-toplevel`")))
 
 (global-set-key "\M-s" 'git-grep)
 
