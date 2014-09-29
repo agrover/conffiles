@@ -120,6 +120,12 @@
 
 (global-set-key "\M-s" 'git-grep)
 
+(defun git-grep-current (search)
+  "git-grep the entire current repo"
+  (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
+  (grep-find (concat "git --no-pager grep --no-color -n \"" search "\"")))
+
+(global-set-key "\M-d" 'git-grep-current)
 
 (defconst qemu-c-style
   '((indent-tabs-mode . nil)
