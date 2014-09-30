@@ -180,3 +180,5 @@
           (one-or-more digit) ":" (one-or-more digit) " error: "
           (message) line-end))
   :modes rust-mode)
+
+(add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
