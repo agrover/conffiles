@@ -24,6 +24,7 @@
  '(size-indication-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tramp-mode t)
+ '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "andy@groveronline.com"))
 (custom-set-faces
