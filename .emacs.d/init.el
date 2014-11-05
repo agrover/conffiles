@@ -211,6 +211,7 @@
 ;; misc
 (global-set-key "\C-o" 'ido-find-file)
 (global-set-key "\C-t" 'hs-toggle-hiding)
+(global-set-key (kbd "M-RET") 'completion-at-point)
 
 ;; isearch
 (global-set-key "\C-s" 'isearch-forward-regexp)
