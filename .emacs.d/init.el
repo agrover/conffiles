@@ -95,6 +95,11 @@
 
 (setq diff-switches "-u")
 
+(require 'swbuff)
+(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
+
 ; set some more gedit-like bindings
 (global-set-key "\M-w" 'kill-this-buffer)
 ;(global-set-key "\C-o" 'menu-find-file-existing)
@@ -108,11 +113,6 @@
 (setq ido-enable-flex-matching t)
 
 (require 'uniquify)
-
-(require 'swbuff)
-(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
 
 ; clean up unused buffers
 (require 'midnight)
