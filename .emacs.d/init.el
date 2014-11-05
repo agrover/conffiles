@@ -89,6 +89,9 @@
     (which-function-mode t)
     (hs-minor-mode t)))
 
+(global-prettify-symbols-mode)
+(superword-mode)
+
 ; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . python-mode))
@@ -104,8 +107,8 @@
 (global-set-key "\M-w" 'kill-this-buffer)
 ;(global-set-key "\C-o" 'menu-find-file-existing)
 (global-set-key "\C-o" 'ido-find-file)
-(global-set-key "\C-f" 'grep-find)
 (global-set-key "\C-t" 'hs-toggle-hiding)
+(global-set-key "\C-f" 'isearch-forward-symbol-at-point)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 
 (require 'ido)
