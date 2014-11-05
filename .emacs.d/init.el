@@ -60,21 +60,18 @@
     (previous-line)
     (move-end-of-line 1)
     (open-line times)))
-(global-set-key "\C-p" 'insert-line-before)
 
 (defun insert-line-after (times)
   (interactive "p")
   (save-excursion
     (move-end-of-line 1)
     (open-line times)))
-(global-set-key "\C-n" 'insert-line-after)
 
 (defun kill-line-before (times)
   (interactive "p")
   (save-excursion
     (move-beginning-of-line 1)
     (kill-line (- times))))
-(global-set-key "\M-p" 'kill-line-before)
 
 (defun kill-line-after (times)
   (interactive "p")
@@ -82,15 +79,11 @@
     (next-line)
     (move-beginning-of-line 1)
     (kill-line times)))
-(global-set-key "\M-n" 'kill-line-after)
 
 (add-hook 'c-mode-common-hook
   (lambda ()
     (which-function-mode t)
     (hs-minor-mode t)))
-
-(global-prettify-symbols-mode)
-(superword-mode)
 
 ; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
@@ -99,17 +92,6 @@
 (setq diff-switches "-u")
 
 (require 'swbuff)
-(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
-
-; set some more gedit-like bindings
-(global-set-key "\M-w" 'kill-this-buffer)
-;(global-set-key "\C-o" 'menu-find-file-existing)
-(global-set-key "\C-o" 'ido-find-file)
-(global-set-key "\C-t" 'hs-toggle-hiding)
-(global-set-key "\C-f" 'isearch-forward-symbol-at-point)
-(global-set-key "\C-s" 'isearch-forward-regexp)
 
 (require 'ido)
 (ido-mode t)
@@ -145,23 +127,17 @@
 
 (add-hook 'isearch-mode-hook 'my-isearch-yank-word-hook)
 
-(global-set-key "\M-8" 'my-isearch-word-at-point)
-
 (defun git-grep (search)
   "git-grep the entire current repo"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n \"" search "\" `git rev-parse --show-toplevel`")))
-
-(global-set-key "\M-s" 'git-grep)
 
 (defun git-grep-current (search)
   "git-grep the entire current repo"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n \"" search "\"")))
 
-(global-set-key "\M-d" 'git-grep-current)
-
-; qemu style setup
+;; qemu style setup
 (defconst qemu-c-style
   '((indent-tabs-mode . nil)
     (c-basic-offset . 4)
@@ -199,9 +175,9 @@
 	     (string-match "/qemu/" buffer-file-name))
     (c-set-style "qemu")))
 
- (add-hook 'c-mode-hook 'maybe-qemu-style)
+(add-hook 'c-mode-hook 'maybe-qemu-style)
 
-; Flycheck for rust
+;; Flycheck for rust
 (require 'flycheck)
 (flycheck-define-checker rust
   "A Rust syntax checker using the Rust compiler"
@@ -215,3 +191,33 @@
   :modes rust-mode)
 
 (add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
+
+(unless (version< emacs-version "24.4")
+  (global-prettify-symbols-mode)
+  (superword-mode))
+
+;; ins/del lines before/after
+(global-set-key "\C-p" 'insert-line-before)
+(global-set-key "\C-n" 'insert-line-after)
+(global-set-key "\M-p" 'kill-line-before)
+(global-set-key "\M-n" 'kill-line-after)
+
+;; swbuff keys
+(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
+(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
+(global-set-key "\M-w" 'kill-this-buffer)
+(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
+
+;; misc
+(global-set-key "\C-o" 'ido-find-file)
+(global-set-key "\C-t" 'hs-toggle-hiding)
+
+;; isearch
+(global-set-key "\C-s" 'isearch-forward-regexp)
+(if (version< emacs-version "24.4")
+    (global-set-key "\C-f" 'my-isearch-word-at-point)
+  (global-set-key "\C-f" 'isearch-forward-symbol-at-point))
+
+;; gg keys
+(global-set-key "\M-s" 'git-grep)
+(global-set-key "\M-d" 'git-grep-current)
