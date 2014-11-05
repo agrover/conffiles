@@ -54,7 +54,37 @@
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
 
-(add-hook 'c-mode-common-hook 
+(defun insert-line-before (times)
+  (interactive "p")
+  (save-excursion
+    (previous-line)
+    (move-end-of-line 1)
+    (open-line times)))
+(global-set-key "\C-p" 'insert-line-before)
+
+(defun insert-line-after (times)
+  (interactive "p")
+  (save-excursion
+    (move-end-of-line 1)
+    (open-line times)))
+(global-set-key "\C-n" 'insert-line-after)
+
+(defun kill-line-before (times)
+  (interactive "p")
+  (save-excursion
+    (move-beginning-of-line 1)
+    (kill-line (- times))))
+(global-set-key "\M-p" 'kill-line-before)
+
+(defun kill-line-after (times)
+  (interactive "p")
+  (save-excursion
+    (next-line)
+    (move-beginning-of-line 1)
+    (kill-line times)))
+(global-set-key "\M-n" 'kill-line-after)
+
+(add-hook 'c-mode-common-hook
   (lambda ()
     (which-function-mode t)
     (hs-minor-mode t)))
@@ -69,7 +99,6 @@
 (global-set-key "\M-w" 'kill-this-buffer)
 ;(global-set-key "\C-o" 'menu-find-file-existing)
 (global-set-key "\C-o" 'ido-find-file)
-(global-set-key "\C-p" 'open-line)
 (global-set-key "\C-f" 'grep-find)
 (global-set-key "\C-t" 'hs-toggle-hiding)
 (global-set-key "\C-s" 'isearch-forward-regexp)
