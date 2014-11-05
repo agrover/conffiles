@@ -25,7 +25,6 @@
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tool-bar-mode nil)
  '(tramp-mode t)
- '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "andy@groveronline.com"))
 (custom-set-faces
@@ -40,6 +39,7 @@
 (setq auto-save-list-file-name nil) ; Don't want any .saves files
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
+(transient-mark-mode)
 
 (require 'package)
 (package-initialize)
