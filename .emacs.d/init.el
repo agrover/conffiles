@@ -23,6 +23,7 @@
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(tool-bar-mode nil)
  '(tramp-mode t)
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
