@@ -58,27 +58,26 @@
 (defun insert-line-before (times)
   (interactive "p")
   (save-excursion
-    (previous-line)
-    (move-end-of-line 1)
+    (forward-line -1)
+    (end-of-line)
     (open-line times)))
 
 (defun insert-line-after (times)
   (interactive "p")
   (save-excursion
-    (move-end-of-line 1)
+    (end-of-line)
     (open-line times)))
 
 (defun kill-line-before (times)
   (interactive "p")
   (save-excursion
-    (move-beginning-of-line 1)
+    (beginning-of-line)
     (kill-line (- times))))
 
 (defun kill-line-after (times)
   (interactive "p")
   (save-excursion
-    (next-line)
-    (move-beginning-of-line 1)
+    (forward-line)
     (kill-line times)))
 
 (add-hook 'c-mode-common-hook
