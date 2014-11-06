@@ -214,7 +214,6 @@
 (global-set-key (kbd "M-RET") 'completion-at-point)
 
 ;; isearch
-(global-set-key "\C-s" 'isearch-forward-regexp)
 (if (version< emacs-version "24.4")
     (global-set-key "\C-f" 'my-isearch-word-at-point)
   (global-set-key "\C-f" 'isearch-forward-symbol-at-point))
