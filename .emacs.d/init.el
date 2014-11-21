@@ -47,11 +47,11 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-; enable commands I use
+;; enable commands I use
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-; Linux mode for C
+;; Linux mode for C
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
 
@@ -85,7 +85,7 @@
     (which-function-mode t)
     (hs-minor-mode t)))
 
-; use python mode for Cython files
+;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . python-mode))
 
@@ -99,7 +99,7 @@
 
 (require 'uniquify)
 
-; clean up unused buffers
+;; clean up unused buffers
 (require 'midnight)
 
 (defun my-isearch-word-at-point ()
