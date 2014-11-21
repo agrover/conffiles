@@ -133,7 +133,7 @@
   (grep-find (concat "git --no-pager grep --no-color -n \"" search "\" `git rev-parse --show-toplevel`")))
 
 (defun git-grep-current (search)
-  "git-grep the entire current repo"
+  "git-grep from the current directory"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n \"" search "\"")))
 
