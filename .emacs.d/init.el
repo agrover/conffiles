@@ -80,10 +80,20 @@
     (forward-line)
     (kill-line times)))
 
+(defun delete-forward-char-and-spaces (&optional arg)
+  (interactive "P")
+  (delete-forward-char arg)
+  (delete-horizontal-space))
+
+(defun delete-backward-char-and-spaces (&optional arg)
+  (interactive "p")
+  (delete-backward-char arg)
+  (delete-horizontal-space))
+
 (add-hook 'c-mode-common-hook
-  (lambda ()
-    (which-function-mode t)
-    (hs-minor-mode t)))
+	  (lambda ()
+	    (which-function-mode t)
+	    (hs-minor-mode t)))
 
 ;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
@@ -196,6 +206,8 @@
   (global-prettify-symbols-mode)
   (superword-mode))
 
+(electric-indent-mode)
+
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'insert-line-before)
 (global-set-key "\C-n" 'insert-line-after)
@@ -209,9 +221,14 @@
 (global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
 
 ;; misc
+(global-set-key "\C-a" 'mark-whole-buffer)
 (global-set-key "\C-o" 'ido-find-file)
 (global-set-key "\C-t" 'hs-toggle-hiding)
+(global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key (kbd "M-RET") 'completion-at-point)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key [delete] 'delete-forward-char-and-spaces)
+(global-set-key [backspace] 'delete-backward-char-and-spaces)
 
 ;; isearch
 (if (version< emacs-version "24.4")
