@@ -81,9 +81,12 @@
     (kill-line times)))
 
 (defun delete-forward-char-and-spaces (&optional arg)
-  (interactive "P")
-  (delete-forward-char arg)
-  (delete-horizontal-space))
+  (interactive "p")
+  (if (eolp)
+      (progn
+	(delete-forward-char arg)
+	(delete-horizontal-space))
+    (delete-forward-char arg)))
 
 (defun delete-backward-char-and-spaces (&optional arg)
   (interactive "p")
