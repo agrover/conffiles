@@ -22,7 +22,7 @@
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(size-indication-mode t)
- '(swbuff-clear-delay 1)
+ '(swbuff-clear-delay 2)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tool-bar-mode nil)
  '(tramp-mode t)
