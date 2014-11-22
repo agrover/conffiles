@@ -6,7 +6,6 @@
  '(auto-save-default nil)
  '(backward-delete-char-untabify-method (quote hungry))
  '(column-number-mode t)
- '(cua-highlight-region-shift-only t)
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(desktop-save-mode t)
@@ -40,7 +39,6 @@
 (setq auto-save-list-file-name nil) ; Don't want any .saves files
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
-(transient-mark-mode)
 
 (require 'package)
 (package-initialize)
