@@ -22,6 +22,7 @@
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(size-indication-mode t)
+ '(swbuff-clear-delay 1)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tool-bar-mode nil)
  '(tramp-mode t)
@@ -98,7 +99,9 @@
 
 (setq diff-switches "-u")
 
-(require 'swbuff)
+(require 'swbuff-x)
+(setq swbuff-display-intermediate-buffers t)
+(setq swbuff-delay-switch t)
 
 (require 'ido)
 (ido-mode t)
@@ -214,7 +217,7 @@
 ;; swbuff keys
 (global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
 (global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
-(global-set-key "\M-w" 'kill-this-buffer)
+(global-set-key "\M-w" 'swbuff-kill-this-buffer)
 (global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
 
 ;; misc
