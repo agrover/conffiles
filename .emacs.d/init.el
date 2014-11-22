@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
+ '(backward-delete-char-untabify-method (quote hungry))
  '(column-number-mode t)
  '(cua-highlight-region-shift-only t)
  '(cua-keep-region-after-copy t)
@@ -87,11 +88,6 @@
 	(delete-forward-char arg)
 	(delete-horizontal-space))
     (delete-forward-char arg)))
-
-(defun delete-backward-char-and-spaces (&optional arg)
-  (interactive "p")
-  (delete-backward-char arg)
-  (delete-horizontal-space))
 
 (add-hook 'c-mode-common-hook
 	  (lambda ()
@@ -209,7 +205,7 @@
   (global-prettify-symbols-mode)
   (superword-mode))
 
-(electric-indent-mode)
+;;(electric-indent-mode)
 
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'insert-line-before)
@@ -231,7 +227,7 @@
 (global-set-key (kbd "M-RET") 'completion-at-point)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
-(global-set-key [backspace] 'delete-backward-char-and-spaces)
+(global-set-key [backspace] 'backward-delete-char-untabify)
 
 ;; isearch
 (if (version< emacs-version "24.4")
