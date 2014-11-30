@@ -138,6 +138,11 @@ highlighting in the buffer display.")
   "Face for highlighting special buffers in swbuff display."
   :group 'swbuff)
 
+(defface swbuff-modified-buffers-face
+  '((t (:foreground "orange" :bold nil :underline nil)))
+  "Face for highlighting modifiedl buffers in swbuff display."
+  :group 'swbuff)
+
 ;; Respect different Emacsen naming conventions, otherwise interactuve
 ;; help will not work as expected.
 
@@ -346,6 +351,9 @@ BCURR is the buffer name to highlight."
 	   ((string-match  swbuff-special-buffers-re bname)
 	    (set-text-properties
 	     start (point) '(face swbuff-special-buffers-face)))
+	   ((buffer-modified-p buffer)
+	    (set-text-properties
+	     start (point) '(face swbuff-modified-buffers-face)))
 	   (t
 	    (set-text-properties
 	     start (point) '(face swbuff-default-face))))
