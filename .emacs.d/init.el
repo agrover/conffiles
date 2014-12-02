@@ -43,13 +43,16 @@
 
 (require 'package)
 (package-initialize)
-
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-ld-dark)
+
+;; http://www.emacswiki.org/emacs/SmoothScrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed t)
 
 ;; enable commands I use
 (put 'downcase-region 'disabled nil)
