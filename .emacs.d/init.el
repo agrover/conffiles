@@ -47,6 +47,10 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-ld-dark)
+
 ;; enable commands I use
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
