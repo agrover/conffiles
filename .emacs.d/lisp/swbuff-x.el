@@ -140,7 +140,7 @@ highlighting in the buffer display.")
 
 (defface swbuff-modified-buffers-face
   '((t (:foreground "orange" :bold nil :underline nil)))
-  "Face for highlighting modifiedl buffers in swbuff display."
+  "Face for highlighting modified buffers in swbuff display."
   :group 'swbuff)
 
 ;; Respect different Emacsen naming conventions, otherwise interactuve
