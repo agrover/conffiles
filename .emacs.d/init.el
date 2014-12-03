@@ -62,6 +62,15 @@
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
 
+(defun duplicate-line()
+  (interactive "p")
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (newline)
+  (yank)
+)
+
 (defun insert-line-before (times)
   (interactive "p")
   (save-excursion
@@ -236,6 +245,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
+(global-set-key (kbd "C-d") 'duplicate-line)
 
 ;; isearch
 (if (version< emacs-version "24.4")
