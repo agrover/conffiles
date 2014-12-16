@@ -125,6 +125,7 @@
 (require 'swbuff-x)
 (setq swbuff-display-intermediate-buffers t)
 (setq swbuff-delay-switch t)
+(setq swbuff-this-frame-only nil)
 
 (require 'ido)
 (ido-mode t)
