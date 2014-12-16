@@ -62,13 +62,15 @@
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
 
-(defun duplicate-line()
+(defun duplicate-line (times)
   (interactive "p")
   (move-beginning-of-line 1)
   (kill-line)
   (yank)
-  (newline)
-  (yank)
+  (dotimes (i times)
+    (progn
+      (newline)
+      (yank)))
 )
 
 (defun insert-line-before (times)
