@@ -104,6 +104,11 @@
 	(delete-horizontal-space))
     (delete-forward-char arg)))
 
+(defun other-window-back (times)
+  (interactive "p")
+  (other-window (- times))
+  )
+
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (which-function-mode t)
@@ -246,6 +251,8 @@
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
 (global-set-key (kbd "C-d") 'duplicate-line)
+(global-set-key (kbd "M-s-<right>") 'other-window)
+(global-set-key (kbd "M-s-<left>") 'other-window-back)
 
 ;; isearch
 (if (version< emacs-version "24.4")
