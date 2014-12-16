@@ -254,8 +254,8 @@
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
 (global-set-key (kbd "C-d") 'duplicate-line)
-(global-set-key (kbd "M-s-<right>") 'other-window)
-(global-set-key (kbd "M-s-<left>") 'other-window-back)
+(global-set-key (kbd "s-e") 'other-window)
+(global-set-key (kbd "s-q") 'other-window-back)
 
 ;; isearch
 (if (version< emacs-version "24.4")
