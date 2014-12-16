@@ -62,16 +62,25 @@
 (setq c-default-style
       '((c-mode . "linux") (other . "gnu")))
 
-(defun duplicate-line (times)
+(defun duplicate-line-or-region (arg)
+  "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
   (interactive "p")
-  (move-beginning-of-line 1)
-  (kill-line)
-  (yank)
-  (dotimes (i times)
-    (progn
-      (newline)
-      (yank)))
-)
+  (let (beg end (origin (point)))
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (let ((region (buffer-substring-no-properties beg end)))
+      (dotimes (i arg)
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point)))
+      (goto-char (+ origin (* (length region) arg) arg)))))
 
 (defun insert-line-before (times)
   (interactive "p")
@@ -253,7 +262,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
-(global-set-key (kbd "C-d") 'duplicate-line)
+(global-set-key (kbd "C-d") 'duplicate-line-or-region)
 (global-set-key (kbd "s-e") 'other-window)
 (global-set-key (kbd "s-q") 'other-window-back)
 
