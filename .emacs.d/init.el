@@ -262,9 +262,11 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
-(global-set-key (kbd "C-d") 'duplicate-line-or-region)
+(global-set-key (kbd "s-d") 'duplicate-line-or-region)
 (global-set-key (kbd "s-e") 'other-window)
 (global-set-key (kbd "s-q") 'other-window-back)
+(global-set-key (kbd "M-<down>") 'scroll-up-line)
+(global-set-key (kbd "M-<up>") 'scroll-down-line)
 
 ;; isearch
 (if (version< emacs-version "24.4")
