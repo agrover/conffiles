@@ -21,6 +21,7 @@
  '(scroll-margin 5)
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
+ '(show-trailing-whitespace t)
  '(size-indication-mode t)
  '(swbuff-clear-delay 2)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
@@ -45,6 +46,8 @@
 (package-initialize)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (require 'color-theme)
 (color-theme-initialize)
@@ -185,12 +188,12 @@ there's a region, all lines that region covers will be duplicated."
 (defun git-grep (search)
   "git-grep the entire current repo"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
-  (grep-find (concat "git --no-pager grep --no-color -n \"" search "\" `git rev-parse --show-toplevel`")))
+  (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\" `git rev-parse --show-toplevel`")))
 
 (defun git-grep-current (search)
   "git-grep from the current directory"
   (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
-  (grep-find (concat "git --no-pager grep --no-color -n \"" search "\"")))
+  (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\"")))
 
 ;; qemu style setup
 (defconst qemu-c-style
@@ -234,16 +237,6 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Flycheck for rust
 (require 'flycheck)
-(flycheck-define-checker rust
-  "A Rust syntax checker using the Rust compiler"
-  :command ("/home/agrover/rust/bin/rustc"
-            "--parse-only"
-            source)
-  :error-patterns
-  ((error line-start (file-name) ":" line ":" column ": "
-          (one-or-more digit) ":" (one-or-more digit) " error: "
-          (message) line-end))
-  :modes rust-mode)
 
 (add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
 
@@ -251,7 +244,7 @@ there's a region, all lines that region covers will be duplicated."
   (global-prettify-symbols-mode)
   (superword-mode))
 
-;;(electric-indent-mode)
+(electric-indent-mode -1)
 
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'insert-line-before)
@@ -271,7 +264,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key "\C-t" 'hs-toggle-hiding)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key (kbd "M-RET") 'completion-at-point)
-(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "RET") 'newline)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
 (global-set-key (kbd "s-d") 'duplicate-line-or-region)
