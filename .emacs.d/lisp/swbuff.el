@@ -119,7 +119,8 @@ width. The possible choices are:
   "*Face used for separators."
   :group 'swbuff)
 
-(defcustom swbuff-exclude-buffer-regexps '("^ ")
+;;(defcustom swbuff-exclude-buffer-regexps '("^ ")
+(defcustom swbuff-exclude-buffer-regexps '("^ " "^\\*.*\\*")
   "*List of regular expressions for excluded buffers.
 The default setting excludes buffers whose name begin with a blank
 character.  To exclude all the internal buffers (that is *scratch*,
