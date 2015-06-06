@@ -264,7 +264,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key "\C-t" 'hs-toggle-hiding)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key (kbd "M-RET") 'completion-at-point)
-(global-set-key (kbd "RET") 'newline)
+(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
 (global-set-key [backspace] 'backward-delete-char-untabify)
 (global-set-key (kbd "s-d") 'duplicate-line-or-region)
