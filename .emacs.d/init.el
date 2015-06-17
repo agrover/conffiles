@@ -126,13 +126,13 @@ there's a region, all lines that region covers will be duplicated."
 (defun my-scroll-up-line ()
   (interactive)
   (scroll-up-line)
-  (next-line)
+;;  (next-line)
   )
 
 (defun my-scroll-down-line ()
   (interactive)
   (scroll-down-line)
-  (previous-line)
+;;  (previous-line)
   )
 
 (add-hook 'c-mode-common-hook
@@ -272,6 +272,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "s-q") 'other-window-back)
 (global-set-key (kbd "M-<down>") 'my-scroll-up-line)
 (global-set-key (kbd "M-<up>") 'my-scroll-down-line)
+(global-set-key (kbd "M-c") 'comment-region)
+(global-set-key (kbd "s-c") 'uncomment-region)
 
 ;; isearch
 (if (version< emacs-version "24.4")
