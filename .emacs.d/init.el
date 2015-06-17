@@ -49,10 +49,6 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-ld-dark)
-
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 (setq mouse-wheel-progressive-speed t)
