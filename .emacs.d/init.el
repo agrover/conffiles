@@ -29,6 +29,7 @@
  '(tramp-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "andy@groveronline.com")
+ '(visual-line-fringe-indicators (quote (left-curly-arrow nil)))
  '(which-function-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
