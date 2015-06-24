@@ -279,6 +279,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key "\C-a" 'mark-whole-buffer)
 (global-set-key "\C-o" 'ido-find-file)
 (global-set-key "\C-t" 'hs-toggle-hiding)
+(global-set-key (kbd "C-S-t") 'hs-hide-all)
+(global-set-key (kbd "C-M-t") 'hs-show-all)
 (global-set-key (kbd "C-b") 'goto-match-paren)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key (kbd "M-RET") 'completion-at-point)
