@@ -132,6 +132,25 @@ there's a region, all lines that region covers will be duplicated."
 ;;  (previous-line)
   )
 
+(defun goto-match-paren (arg)
+  "Go to the matching parenthesis if on parenthesis. Else go to the
+   opening parenthesis one level up."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1))
+	(t
+	 (backward-char 1)
+	 (cond ((looking-at "\\s\)")
+		(forward-char 1) (backward-list 1))
+	       (t
+		(while (not (looking-at "\\s("))
+		  (backward-char 1)
+		  (cond ((looking-at "\\s\)")
+			 (message "->> )")
+			 (forward-char 1)
+			 (backward-list 1)
+			 (backward-char 1)))
+		  ))))))
+
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (hs-minor-mode t)
@@ -260,6 +279,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key "\C-a" 'mark-whole-buffer)
 (global-set-key "\C-o" 'ido-find-file)
 (global-set-key "\C-t" 'hs-toggle-hiding)
+(global-set-key (kbd "C-b") 'goto-match-paren)
 (global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key (kbd "M-RET") 'completion-at-point)
 (global-set-key (kbd "RET") 'newline-and-indent)
