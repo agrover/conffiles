@@ -134,7 +134,9 @@ there's a region, all lines that region covers will be duplicated."
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
-	    (hs-minor-mode t)))
+	    (hs-minor-mode t)
+	    (visual-line-mode t)
+	    ))
 
 ;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
