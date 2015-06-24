@@ -155,6 +155,7 @@ there's a region, all lines that region covers will be duplicated."
 	  (lambda ()
 	    (hs-minor-mode t)
 	    (visual-line-mode t)
+	    (superword-mode t)
 	    ))
 
 ;; use python mode for Cython files
@@ -258,8 +259,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
 
 (unless (version< emacs-version "24.4")
-  (global-prettify-symbols-mode)
-  (superword-mode))
+  (global-prettify-symbols-mode))
 
 (electric-indent-mode -1)
 
