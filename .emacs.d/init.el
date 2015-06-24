@@ -28,7 +28,8 @@
  '(tool-bar-mode nil)
  '(tramp-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(user-mail-address "andy@groveronline.com"))
+ '(user-mail-address "andy@groveronline.com")
+ '(which-function-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -131,9 +132,8 @@ there's a region, all lines that region covers will be duplicated."
 ;;  (previous-line)
   )
 
-(add-hook 'c-mode-common-hook
+(add-hook 'prog-mode-hook
 	  (lambda ()
-	    (which-function-mode t)
 	    (hs-minor-mode t)))
 
 ;; use python mode for Cython files
