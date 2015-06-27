@@ -151,13 +151,6 @@ there's a region, all lines that region covers will be duplicated."
 			 (backward-char 1)))
 		  ))))))
 
-(add-hook 'prog-mode-hook
-	  (lambda ()
-	    (hs-minor-mode t)
-	    (visual-line-mode t)
-	    (superword-mode t)
-	    ))
-
 ;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . python-mode))
@@ -257,6 +250,18 @@ there's a region, all lines that region covers will be duplicated."
 (require 'flycheck)
 
 (add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
+
+(add-hook 'prog-mode-hook
+	  (lambda ()
+	    (hs-minor-mode t)
+	    (visual-line-mode t)
+	    (superword-mode t)
+	    ))
+
+(add-hook 'grep-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "M-RET") 'compilation-display-error)
+	    ))
 
 (unless (version< emacs-version "24.4")
   (global-prettify-symbols-mode))
