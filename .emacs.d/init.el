@@ -198,12 +198,12 @@ there's a region, all lines that region covers will be duplicated."
 
 (defun git-grep (search)
   "git-grep the entire current repo"
-  (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
+  (interactive (list (read-string "Search for: " (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\" `git rev-parse --show-toplevel`")))
 
 (defun git-grep-current (search)
   "git-grep from the current directory"
-  (interactive (list (completing-read "Search for: " nil nil nil (current-word))))
+  (interactive (list (read-string "Search for: " (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\"")))
 
 ;; qemu style setup
