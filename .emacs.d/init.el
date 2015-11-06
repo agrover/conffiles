@@ -299,6 +299,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-<up>") 'my-scroll-down-line)
 (global-set-key (kbd "M-c") 'comment-region)
 (global-set-key (kbd "s-c") 'uncomment-region)
+(global-set-key (kbd "s-f") 'fill-region)
 
 ;; isearch
 (if (version< emacs-version "24.4")
