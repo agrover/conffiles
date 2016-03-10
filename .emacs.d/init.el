@@ -168,6 +168,9 @@ there's a region, all lines that region covers will be duplicated."
 (setq swbuff-delay-switch t)
 (setq swbuff-this-frame-only nil)
 
+(require 'multicolumn)
+(multicolumn-global-mode 1)
+
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
