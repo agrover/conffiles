@@ -253,8 +253,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'c-mode-hook 'maybe-qemu-style)
 
 ;; Flycheck for rust
-(require 'flycheck)
-
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
 
 (add-hook 'prog-mode-hook
