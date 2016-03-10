@@ -306,6 +306,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-<down>") 'my-scroll-up-line)
 (global-set-key (kbd "M-<up>") 'my-scroll-down-line)
 (global-set-key (kbd "M-b") 'three-balanced-windows)
+(global-set-key (kbd "C-M-b") 'multicolumn-transpose-windows)
 (global-set-key (kbd "M-c") 'comment-region)
 (global-set-key (kbd "s-c") 'uncomment-region)
 (global-set-key (kbd "s-f") 'fill-region)
