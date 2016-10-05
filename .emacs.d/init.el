@@ -257,7 +257,11 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; Flycheck for rust
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-(add-hook 'rust-mode-hook (lambda () (flycheck-mode)))
+(add-hook 'rust-mode-hook
+	  (lambda ()
+	    (flycheck-mode)
+	    (rust-enable-format-on-save)
+	    ))
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
