@@ -13,6 +13,7 @@
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(package-selected-packages (quote (rust-mode multicolumn flymake-rust flycheck-rust)))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
