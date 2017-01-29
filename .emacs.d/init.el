@@ -251,9 +251,9 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; swbuff keys
 (global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
-(global-set-key "\M-q" 'swbuff-switch-to-previous-buffer)
-(global-set-key "\M-w" 'swbuff-kill-this-buffer)
-(global-set-key "\M-e" 'swbuff-switch-to-next-buffer)
+(global-set-key (kbd "M-q") 'swbuff-switch-to-previous-buffer)
+(global-set-key (kbd "M-e") 'swbuff-switch-to-next-buffer)
+(global-set-key (kbd "M-w") 'swbuff-kill-this-buffer)
 
 ;; misc
 (global-set-key "\C-a" 'mark-whole-buffer)
@@ -277,6 +277,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-c") 'comment-region)
 (global-set-key (kbd "s-c") 'uncomment-region)
 (global-set-key (kbd "s-f") 'fill-region)
+(global-set-key (kbd "C-x 2") 'split-window-right)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
