@@ -119,18 +119,6 @@ there's a region, all lines that region covers will be duplicated."
   (other-window (- times))
   )
 
-(defun my-scroll-up-line ()
-  (interactive)
-  (scroll-up-line)
-;;  (next-line)
-  )
-
-(defun my-scroll-down-line ()
-  (interactive)
-  (scroll-down-line)
-;;  (previous-line)
-  )
-
 (defun three-balanced-windows ()
   "Make three equal-width windows"
   (interactive)
@@ -180,31 +168,6 @@ there's a region, all lines that region covers will be duplicated."
 
 ;; clean up unused buffers
 (require 'midnight)
-
-(defun my-isearch-word-at-point ()
-  (interactive)
-  (call-interactively 'isearch-forward-regexp))
-
-(defun my-isearch-yank-word-hook ()
-  (when (equal this-command 'my-isearch-word-at-point)
-    (let ((string (concat "\\_<"
-                          (buffer-substring-no-properties
-                           (progn (skip-syntax-backward "w_") (point))
-                           (progn (skip-syntax-forward "w_") (point)))
-                          "\\_>")))
-      (if (and isearch-case-fold-search
-               (eq 'not-yanks search-upper-case))
-          (setq string (downcase string)))
-      (setq isearch-string string
-            isearch-message
-            (concat isearch-message
-                    (mapconcat 'isearch-text-char-description
-                               string ""))
-            isearch-yank-flag t)
-      ;;(isearch-search-and-update)
-      )))
-
-(add-hook 'isearch-mode-hook 'my-isearch-yank-word-hook)
 
 (defun git-grep (search)
   "git-grep the entire current repo"
@@ -268,7 +231,6 @@ there's a region, all lines that region covers will be duplicated."
 	  (lambda ()
 	    (hs-minor-mode t)
 	    (visual-line-mode t)
-	    (superword-mode t)
 	    ))
 
 (add-hook 'grep-mode-hook
@@ -308,8 +270,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "s-d") 'duplicate-line-or-region)
 (global-set-key (kbd "s-e") 'other-window)
 (global-set-key (kbd "s-q") 'other-window-back)
-(global-set-key (kbd "M-<down>") 'my-scroll-up-line)
-(global-set-key (kbd "M-<up>") 'my-scroll-down-line)
+(global-set-key (kbd "M-<down>") 'scroll-up-line)
+(global-set-key (kbd "M-<up>") 'scroll-down-line)
 (global-set-key (kbd "C-M-b") 'three-balanced-windows)
 (global-set-key (kbd "M-b") 'multicolumn-transpose-windows)
 (global-set-key (kbd "M-c") 'comment-region)
@@ -317,9 +279,7 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "s-f") 'fill-region)
 
 ;; isearch
-(if (version< emacs-version "24.4")
-    (global-set-key "\C-f" 'my-isearch-word-at-point)
-  (global-set-key "\C-f" 'isearch-forward-symbol-at-point))
+(global-set-key "\C-f" 'isearch-forward-symbol-at-point)
 
 ;; gg keys
 (global-set-key "\M-s" 'git-grep)
