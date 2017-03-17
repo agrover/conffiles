@@ -13,7 +13,7 @@
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
- '(package-selected-packages (quote (rust-mode multicolumn flymake-rust flycheck-rust)))
+ '(package-selected-packages (quote (move-text rust-mode multicolumn flycheck-rust)))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
@@ -242,6 +242,9 @@ there's a region, all lines that region covers will be duplicated."
   (global-prettify-symbols-mode))
 
 (electric-indent-mode -1)
+
+(require 'move-text)
+(move-text-default-bindings)
 
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'insert-line-before)
