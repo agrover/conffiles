@@ -13,6 +13,8 @@
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(org-cycle-emulate-tab nil)
+ '(org-support-shift-select t)
  '(package-selected-packages (quote (move-text rust-mode multicolumn flycheck-rust)))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
@@ -236,6 +238,12 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'grep-mode-hook
 	  (lambda ()
 	    (local-set-key (kbd "M-RET") 'compilation-display-error)
+	    ))
+
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (refill-mode)
+	    (define-key org-mode-map "\M-e" nil)
 	    ))
 
 (unless (version< emacs-version "24.4")
