@@ -244,6 +244,7 @@ there's a region, all lines that region covers will be duplicated."
 	  (lambda ()
 	    (refill-mode)
 	    (define-key org-mode-map "\M-e" nil)
+	    (flyspell-mode)
 	    ))
 
 (unless (version< emacs-version "24.4")
