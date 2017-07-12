@@ -9,17 +9,21 @@
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(desktop-save-mode t)
+ '(global-prettify-symbols-mode t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(midnight-mode t)
  '(org-cycle-emulate-tab nil)
  '(org-support-shift-select t)
- '(package-selected-packages (quote (move-text rust-mode multicolumn flycheck-rust)))
+ '(package-selected-packages
+   (quote
+    (cargo move-text rust-mode multicolumn flycheck-rust)))
+ '(prettify-symbols-unprettify-at-point (quote right-edge))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
- '(scroll-bar-mode nil)
  '(scroll-conservatively 10000)
  '(scroll-margin 5)
  '(send-mail-function (quote mailclient-send-it))
@@ -181,59 +185,46 @@ there's a region, all lines that region covers will be duplicated."
   (interactive (list (read-string "Search for: " (current-word))))
   (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\"")))
 
-;; qemu style setup
-(defconst qemu-c-style
-  '((indent-tabs-mode . nil)
-    (c-basic-offset . 4)
-    (tab-width . 8)
-    (c-comment-only-line-offset . 0)
-    (c-hanging-braces-alist . ((substatement-open before after)))
-    (c-offsets-alist . ((statement-block-intro . +)
-                        (substatement-open . 0)
-                        (label . 0)
-                        (statement-cont . +)
-                        (innamespace . 0)
-                        (inline-open . 0)
-                        ))
-    (c-hanging-braces-alist .
-                            ((brace-list-open)
-                             (brace-list-intro)
-                             (brace-list-entry)
-                             (brace-list-close)
-                             (brace-entry-open)
-                             (block-close . c-snug-do-while)
-                             ;; structs have hanging braces on open
-                             (class-open . (after))
-                             ;; ditto if statements
-                             (substatement-open . (after))
-                             ;; and no auto newline at the end
-                             (class-close)
-                             ))
-    )
-  "QEMU C Programming Style")
-
-(c-add-style "qemu" qemu-c-style)
-
-(defun maybe-qemu-style ()
-  (when (and buffer-file-name
-	     (string-match "/qemu/" buffer-file-name))
-    (c-set-style "qemu")))
-
-(add-hook 'c-mode-hook 'maybe-qemu-style)
-
-;; Flycheck for rust
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-(add-hook 'rust-mode-hook
-	  (lambda ()
-;;	    (flycheck-mode)
-	    (rust-enable-format-on-save)
-	    ))
+;; org mode settings
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)"  "NEXT(n)" "|" "DONE(d)")
+	      (sequence "REPEAT(r)"  "WAIT(w)"  "|"  "PAUSED(p)" "CANCELLED(c)" )
+	      (sequence "IDEA(i)" "MAYBE(y)" "STAGED(s)" "WORKING(k)" "|" "USED(u)")
+)))
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (hs-minor-mode t)
 	    (visual-line-mode t)
 	    ))
+
+;; Flycheck for rust
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+(add-hook 'rust-mode-hook
+	  (lambda ()
+	    (flycheck-mode)
+	    (rust-enable-format-on-save)
+	    ))
+
+(add-hook
+ 'rust-mode-hook
+ (lambda ()
+   (setq
+    prettify-symbols-alist
+    '(
+      ("fn"         . ?ƒ)
+      ("Fn"         . ?𝘍)
+      ("->"         . ?→)
+      ("=>"         . ?⇒)
+      (".."         . ?‥)
+      ("..."        . ?…)
+
+      ;; ("*"          . ?×)
+      ;; ("/"          . ?÷)
+      )
+    )
+   )
+ )
 
 (add-hook 'grep-mode-hook
 	  (lambda ()
@@ -247,13 +238,9 @@ there's a region, all lines that region covers will be duplicated."
 	    (flyspell-mode)
 	    ))
 
-(unless (version< emacs-version "24.4")
-  (global-prettify-symbols-mode))
-
 (electric-indent-mode -1)
 
 (require 'move-text)
-(move-text-default-bindings)
 
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'insert-line-before)
