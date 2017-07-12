@@ -233,9 +233,9 @@ there's a region, all lines that region covers will be duplicated."
 
 (add-hook 'org-mode-hook
 	  (lambda ()
-	    (refill-mode)
 	    (define-key org-mode-map "\M-e" nil)
 	    (flyspell-mode)
+	    (visual-line-mode)
 	    ))
 
 (electric-indent-mode -1)
