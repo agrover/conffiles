@@ -42,7 +42,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "unknown" :family "Inconsolata")))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "PfEd" :family "Inconsolata")))))
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (setq grep-highlight-matches t)
@@ -236,6 +236,7 @@ there's a region, all lines that region covers will be duplicated."
 	    (define-key org-mode-map "\M-e" nil)
 	    (flyspell-mode)
 	    (visual-line-mode)
+	    (auto-fill-mode -1)
 	    ))
 
 (electric-indent-mode -1)
