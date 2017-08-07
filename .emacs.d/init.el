@@ -202,7 +202,7 @@ there's a region, all lines that region covers will be duplicated."
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook
 	  (lambda ()
-	    (flycheck-mode)
+;;	    (flycheck-mode)
 	    (rust-enable-format-on-save)
 	    ))
 
