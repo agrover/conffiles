@@ -31,6 +31,7 @@
  '(swbuff-clear-delay 2)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tool-bar-mode nil)
+ '(tramp-default-method "ssh")
  '(tramp-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "andy@groveronline.com")
