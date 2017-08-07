@@ -28,7 +28,6 @@
  '(scroll-margin 5)
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
- '(show-trailing-whitespace t)
  '(swbuff-clear-delay 2)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(tool-bar-mode nil)
@@ -195,6 +194,7 @@ there's a region, all lines that region covers will be duplicated."
 	  (lambda ()
 	    (hs-minor-mode t)
 	    (visual-line-mode t)
+	    (set-variable `show-trailing-whitespace t)
 	    ))
 
 ;; Flycheck for rust
