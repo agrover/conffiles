@@ -9,6 +9,7 @@
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(desktop-save-mode t)
+ '(fill-column 78)
  '(global-prettify-symbols-mode t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
