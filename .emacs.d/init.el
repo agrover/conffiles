@@ -49,6 +49,8 @@
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
