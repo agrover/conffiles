@@ -277,8 +277,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-c") 'comment-region)
 (global-set-key (kbd "s-c") 'uncomment-region)
 (global-set-key (kbd "s-f") 'fill-region)
-(global-set-key (kbd "M-s-<up>") 'move-text-region-up)
-(global-set-key (kbd "M-s-<down>") 'move-text-region-down)
+(global-set-key (kbd "M-s-<up>") 'move-text-up)
+(global-set-key (kbd "M-s-<down>") 'move-text-down)
 (global-set-key (kbd "M-s-t") 'transpose-chars)
 
 ;; isearch
