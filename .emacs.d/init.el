@@ -220,8 +220,8 @@ there's a region, all lines that region covers will be duplicated."
       ("Fn"         . ?𝘍)
       ("->"         . ?→)
       ("=>"         . ?⇒)
-      (".."         . ?‥)
-      ("..."        . ?…)
+      ;; (".."         . ?‥)
+      ;; ("..."        . ?…)
 
       ;; ("*"          . ?×)
       ;; ("/"          . ?÷)
