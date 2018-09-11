@@ -90,6 +90,23 @@ there's a region, all lines that region covers will be duplicated."
         (setq end (point)))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
+(defun delete-word (arg)
+  "Delete characters forward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (if (use-region-p)
+      (delete-region (region-beginning) (region-end))
+    (delete-region (point) (progn (forward-word arg) (point)))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the end of a word.
+With argument, do this that many times."
+  (interactive "p")
+  (delete-word (- arg)))
+
+(dolist (cmd '(delete-word backward-delete-word))
+  (put cmd 'CUA 'move))
+
 (defun insert-line-before (times)
   (interactive "p")
   (save-excursion
@@ -284,6 +301,8 @@ there's a region, all lines that region covers will be duplicated."
 (global-set-key (kbd "M-s-<up>") 'move-text-up)
 (global-set-key (kbd "M-s-<down>") 'move-text-down)
 (global-set-key (kbd "M-s-t") 'transpose-chars)
+(global-set-key (kbd "<C-backspace>") 'backward-delete-word)
+(global-set-key (kbd "<C-delete>") 'delete-word)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
@@ -291,3 +310,19 @@ there's a region, all lines that region covers will be duplicated."
 ;; gg keys
 (global-set-key "\M-s" 'git-grep)
 (global-set-key "\M-d" 'git-grep-current)
+
+(defun query-replace-in-open-buffers (arg1 arg2)
+  "query-replace in open files"
+  (interactive "sQuery Replace in open Buffers: \nsquery with: ")
+  (mapcar
+   (lambda (x)
+     (find-file x)
+     (save-excursion
+       (beginning-of-buffer)
+       (query-replace arg1 arg2)))
+   (delq
+    nil
+    (mapcar
+     (lambda (x)
+       (buffer-file-name x))
+     (buffer-list)))))
