@@ -189,18 +189,16 @@ With argument, do this that many times."
 
 (require 'uniquify)
 
+;; custom ripgrep search params
+(rg-define-search my-rg-search-all-files
+  "Don't use default search params"
+  :query ask
+  :format literal
+  :files "all"
+  :dir project)
+
 ;; clean up unused buffers
 (require 'midnight)
-
-(defun git-grep (search)
-  "git-grep the entire current repo"
-  (interactive (list (read-string "Search for: " (current-word))))
-  (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\" `git rev-parse --show-toplevel`")))
-
-(defun git-grep-current (search)
-  "git-grep from the current directory"
-  (interactive (list (read-string "Search for: " (current-word))))
-  (grep-find (concat "git --no-pager grep --no-color -n -- \"" search "\"")))
 
 ;; org mode settings
 (setq org-todo-keywords
@@ -310,8 +308,8 @@ With argument, do this that many times."
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
 
 ;; gg keys
-(global-set-key "\M-s" 'git-grep)
-(global-set-key "\M-d" 'git-grep-current)
+(global-set-key "\M-s" 'rg-dwim)
+(global-set-key "\M-d" 'my-rg-search-all-files)
 
 (defun query-replace-in-open-buffers (arg1 arg2)
   "query-replace in open files"
