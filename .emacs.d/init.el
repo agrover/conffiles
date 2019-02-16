@@ -20,7 +20,7 @@
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (cargo move-text rust-mode multicolumn flycheck-rust)))
+    (clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
