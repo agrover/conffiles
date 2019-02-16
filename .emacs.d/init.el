@@ -183,9 +183,6 @@ With argument, do this that many times."
 (setq swbuff-delay-switch t)
 (setq swbuff-this-frame-only nil)
 
-(require 'multicolumn)
-(multicolumn-global-mode 1)
-
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
