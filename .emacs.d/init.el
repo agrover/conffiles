@@ -260,6 +260,11 @@ With argument, do this that many times."
 	    (auto-fill-mode -1)
 	    ))
 
+(add-hook 'c++-mode-hook
+	  (function (lambda ()
+	    (add-hook
+	     `before-save-hook 'clang-format-buffer nil 'local))))
+
 (electric-indent-mode -1)
 
 (require 'move-text)
