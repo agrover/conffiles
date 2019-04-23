@@ -20,8 +20,13 @@
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
+    (go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
+ '(rg-custom-type-aliases
+   (quote
+    (("gn" . "*.gn *.gni")
+     ("gyp" . "*.gyp *.gypi")
+     ("idl" . "*.idl *.webidl"))))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
@@ -196,6 +201,12 @@ With argument, do this that many times."
   :format literal
   :files "all"
   :dir project)
+(rg-define-search my-rg-search-all-curdir-files
+  "Don't use default search params"
+  :query ask
+  :format literal
+  :files "all"
+  :dir current)
 
 ;; clean up unused buffers
 (require 'midnight)
@@ -218,7 +229,7 @@ With argument, do this that many times."
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook
 	  (lambda ()
-;;	    (flycheck-mode)
+	    (flycheck-mode)
 	    (rust-enable-format-on-save)
 	    ))
 
@@ -230,8 +241,8 @@ With argument, do this that many times."
     '(
       ("fn"         . ?ƒ)
       ("Fn"         . ?𝘍)
-      ("->"         . ?→)
-      ("=>"         . ?⇒)
+      ;; ("->"         . ?→)
+      ;; ("=>"         . ?⇒)
       ;; (".."         . ?‥)
       ;; ("..."        . ?…)
 
@@ -303,13 +314,15 @@ With argument, do this that many times."
 (global-set-key (kbd "M-s-t") 'transpose-chars)
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "<C-delete>") 'delete-word)
+(global-set-key (kbd "s-n") 'flycheck-next-error)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
 
 ;; gg keys
-(global-set-key "\M-s" 'rg-dwim)
-(global-set-key "\M-d" 'my-rg-search-all-files)
+(global-set-key "\M-a" 'rg-dwim)
+(global-set-key "\M-s" 'my-rg-search-all-files)
+(global-set-key "\M-d" 'my-rg-search-all-curdir-files)
 
 (defun query-replace-in-open-buffers (arg1 arg2)
   "query-replace in open files"
