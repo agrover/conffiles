@@ -9,7 +9,7 @@
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(desktop-save-mode t)
- '(fill-column 78)
+ '(fill-column 80)
  '(global-prettify-symbols-mode t)
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
@@ -20,12 +20,14 @@
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
+    (yaml-mode go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
+ '(rg-command-line-flags (quote ("--max-columns 1024 --max-count 512")))
  '(rg-custom-type-aliases
    (quote
     (("gn" . "*.gn *.gni")
      ("gyp" . "*.gyp *.gypi")
+     ("everything" . "*")
      ("idl" . "*.idl *.webidl"))))
  '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_internet))))
  '(save-place t nil (saveplace))
@@ -199,13 +201,14 @@ With argument, do this that many times."
   "Don't use default search params"
   :query ask
   :format literal
-  :files "all"
+  :files "everything"
   :dir project)
+
 (rg-define-search my-rg-search-all-curdir-files
   "Don't use default search params"
   :query ask
   :format literal
-  :files "all"
+  :files "everything"
   :dir current)
 
 ;; clean up unused buffers
@@ -272,6 +275,13 @@ With argument, do this that many times."
 	     `before-save-hook 'clang-format-buffer nil 'local))))
 
 (electric-indent-mode -1)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+(add-hook 'yaml-mode-hook
+	  '(lambda ()
+	     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (require 'move-text)
 
