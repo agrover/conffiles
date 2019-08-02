@@ -14,6 +14,7 @@
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
+ '(kill-whole-line t)
  '(make-backup-files nil)
  '(midnight-mode t)
  '(org-cycle-emulate-tab nil)
@@ -133,7 +134,12 @@ With argument, do this that many times."
     (beginning-of-line)
     (kill-line (- times))))
 
-(defun kill-line-after (times)
+(defun kill-line-current (times)
+  (interactive "p")
+    (beginning-of-visual-line)
+    (kill-line times))
+
+  (defun kill-line-after (times)
   (interactive "p")
   (save-excursion
     (forward-line)
@@ -286,10 +292,11 @@ With argument, do this that many times."
 (require 'move-text)
 
 ;; ins/del lines before/after
-(global-set-key "\C-p" 'insert-line-before)
-(global-set-key "\C-n" 'insert-line-after)
-(global-set-key "\M-p" 'kill-line-before)
-(global-set-key "\M-n" 'kill-line-after)
+(global-set-key "\C-p" 'kill-line-before)
+(global-set-key "\C-k" 'kill-line-current)
+(global-set-key "\C-n" 'kill-line-after)
+(global-set-key "\M-p" 'insert-line-before)
+(global-set-key "\M-n" 'insert-line-after)
 
 ;; swbuff keys
 (global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
