@@ -8,6 +8,7 @@
  '(column-number-mode t)
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
+ '(cycbuf-clear-delay 2)
  '(desktop-save-mode t)
  '(fill-column 80)
  '(global-prettify-symbols-mode t)
@@ -21,7 +22,7 @@
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (yaml-mode go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
+    (cycbuf yaml-mode go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
  '(rg-command-line-flags (quote ("--max-columns 1024 --max-count 512")))
  '(rg-custom-type-aliases
@@ -51,6 +52,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 181 :width normal :foundry "CYRE" :family "Inconsolata"))))
+ '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
  '(rust-question-mark-face ((t (:inherit font-lock-builtin-face :foreground "orange red" :weight bold)))))
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
@@ -191,10 +193,7 @@ With argument, do this that many times."
 
 (setq diff-switches "-u")
 
-(require 'swbuff-x)
-(setq swbuff-display-intermediate-buffers t)
-(setq swbuff-delay-switch t)
-(setq swbuff-this-frame-only nil)
+(require 'cycbuf)
 
 (require 'ido)
 (ido-mode t)
@@ -298,11 +297,10 @@ With argument, do this that many times."
 (global-set-key "\M-p" 'insert-line-before)
 (global-set-key "\M-n" 'insert-line-after)
 
-;; swbuff keys
-(global-set-key [(control tab)] 'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "M-q") 'swbuff-switch-to-previous-buffer)
-(global-set-key (kbd "M-e") 'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "M-w") 'swbuff-kill-this-buffer)
+;; cycbuf keys
+(global-set-key (kbd "M-q") 'cycbuf-switch-to-previous-buffer)
+(global-set-key (kbd "M-e") 'cycbuf-switch-to-next-buffer)
+(global-set-key (kbd "M-w") 'kill-this-buffer)
 
 ;; misc
 (global-set-key "\C-a" 'mark-whole-buffer)
