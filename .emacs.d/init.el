@@ -22,7 +22,7 @@
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (cycbuf yaml-mode go-mode clang-format rg cargo move-text rust-mode multicolumn flycheck-rust)))
+    (cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust)))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
  '(rg-command-line-flags (quote ("--max-columns 1024 --max-count 512")))
  '(rg-custom-type-aliases
@@ -51,8 +51,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 181 :width normal :foundry "CYRE" :family "Inconsolata"))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(rust-question-mark-face ((t (:inherit font-lock-builtin-face :foreground "orange red" :weight bold)))))
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
@@ -141,7 +141,7 @@ With argument, do this that many times."
     (beginning-of-visual-line)
     (kill-line times))
 
-  (defun kill-line-after (times)
+(defun kill-line-after (times)
   (interactive "p")
   (save-excursion
     (forward-line)
@@ -234,7 +234,11 @@ With argument, do this that many times."
 	    ))
 
 ;; Flycheck for rust
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+(add-hook 'flycheck-mode-hook
+	  (lambda ()
+	    (flycheck-rust-setup)
+	    ))
+
 (add-hook 'rust-mode-hook
 	  (lambda ()
 	    (flycheck-mode)
@@ -341,7 +345,7 @@ With argument, do this that many times."
 
 (defun query-replace-in-open-buffers (arg1 arg2)
   "query-replace in open files"
-  (interactive "sQuery Replace in open Buffers: \nsquery with: ")
+  (interactive "sQuery Replace in open Buffers: \nswith: ")
   (mapcar
    (lambda (x)
      (find-file x)
