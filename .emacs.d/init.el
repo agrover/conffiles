@@ -22,7 +22,7 @@
  '(org-cycle-emulate-tab nil)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust))
+   '(expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -208,6 +208,8 @@ With argument, do this that many times."
 
 (require 'uniquify)
 
+(require 'expand-region)
+
 ;; custom ripgrep search params
 (rg-define-search my-rg-search-all-files
   "Don't use default search params"
@@ -343,6 +345,8 @@ With argument, do this that many times."
 (global-set-key (kbd "<C-backspace>") 'backward-delete-word)
 (global-set-key (kbd "<C-delete>") 'delete-word)
 (global-set-key (kbd "s-n") 'flycheck-next-error)
+(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C--") 'er/contract-region)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
