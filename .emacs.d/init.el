@@ -241,7 +241,6 @@ With argument, do this that many times."
 	    (visual-line-mode t)
 	    (rainbow-delimiters-mode t)
 	    (set-variable `show-trailing-whitespace t)
-	    (smartparens-mode t)
 	    ))
 
 ;; Flycheck for rust
@@ -307,7 +306,7 @@ With argument, do this that many times."
 
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'kill-line-before)
-(global-set-key "\C-k" 'kill-line-current)
+(global-set-key (kbd "<s-delete>") 'kill-line-current)
 (global-set-key "\C-n" 'kill-line-after)
 (global-set-key "\M-p" 'insert-line-before)
 (global-set-key "\M-n" 'insert-line-after)
