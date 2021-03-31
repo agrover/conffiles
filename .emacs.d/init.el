@@ -11,6 +11,7 @@
  '(cycbuf-buffer-sort-function 'cycbuf-sort-by-recency)
  '(desktop-save-mode t)
  '(fill-column 80)
+ '(global-auto-revert-mode t)
  '(global-prettify-symbols-mode t)
  '(indicate-buffer-boundaries 'left)
  '(indicate-empty-lines t)
@@ -22,7 +23,7 @@
  '(org-cycle-emulate-tab nil)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust))
+   '(clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -37,7 +38,6 @@
  '(scroll-margin 5)
  '(send-mail-function 'mailclient-send-it)
  '(show-paren-mode t)
- '(swbuff-clear-delay 2)
  '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
@@ -288,10 +288,12 @@ With argument, do this that many times."
 	    (auto-fill-mode -1)
 	    ))
 
-(add-hook 'c++-mode-hook
-	  (function (lambda ()
-	    (add-hook
-	     `before-save-hook 'clang-format-buffer nil 'local))))
+;; (add-hook 'c++-mode-hook
+;; 	  (function (lambda ()
+;; 	    (add-hook
+;; 	     `before-save-hook 'clang-format-buffer nil 'local))))
+
+(add-hook 'c-mode-common-hook #'clang-format+-mode)
 
 (electric-indent-mode -1)
 
