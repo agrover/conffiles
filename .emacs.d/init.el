@@ -21,6 +21,7 @@
  '(make-backup-files nil)
  '(midnight-mode t)
  '(org-cycle-emulate-tab nil)
+ '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
    '(clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
