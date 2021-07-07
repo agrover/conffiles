@@ -51,7 +51,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "1ASC" :family "Droid Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 181 :width normal :foundry "PfEd" :family "Inconsolata"))))
  '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
@@ -61,7 +61,7 @@
  '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-base-face :foreground "burlywood"))))
  '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-base-face :foreground "medium sea green"))))
  '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-base-face :foreground "blue violet"))))
- '(rust-question-mark-face ((t (:inherit font-lock-builtin-face :foreground "orange red" :weight bold)))))
+ '(rust-question-mark ((t (:inherit font-lock-builtin-face :foreground "orange red" :weight bold)))))
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (setq grep-highlight-matches t)
