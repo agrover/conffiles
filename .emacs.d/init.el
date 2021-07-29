@@ -18,13 +18,14 @@
  '(inhibit-startup-screen t)
  '(isearch-lazy-count t)
  '(kill-whole-line t)
+ '(lsp-ui-sideline-enable nil)
  '(make-backup-files nil)
  '(midnight-mode t)
  '(org-cycle-emulate-tab nil)
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -229,6 +230,13 @@ With argument, do this that many times."
   :files "everything"
   :dir current)
 
+(rg-define-search my-rg-search-gitdir-files
+  "Don't use default search params"
+  :query ask
+  :format literal
+  :files "everything"
+  :dir (concat (getenv "HOME") "/git"))
+
 ;; clean up unused buffers
 (require 'midnight)
 
@@ -253,10 +261,15 @@ With argument, do this that many times."
 	    (flycheck-rust-setup)
 	    ))
 
+(require 'lsp-mode)
+(add-hook 'rust-mode-hook #'lsp-deferred)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
 (add-hook 'rust-mode-hook
 	  (lambda ()
 	    (flycheck-mode)
 	    (rust-enable-format-on-save)
+	    (setq indent-tabs-mode nil)
 	    ))
 
 (add-hook
@@ -360,6 +373,7 @@ With argument, do this that many times."
 (global-set-key "\M-a" 'rg-dwim)
 (global-set-key "\M-s" 'my-rg-search-all-files)
 (global-set-key "\M-d" 'my-rg-search-all-curdir-files)
+(global-set-key "\M-f" 'my-rg-search-gitdir-files)
 
 (defun query-replace-in-open-buffers (arg1 arg2)
   "query-replace in open files"
