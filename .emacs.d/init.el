@@ -6,6 +6,7 @@
  '(auto-save-default nil)
  '(backward-delete-char-untabify-method 'hungry)
  '(column-number-mode t)
+ '(company-idle-delay 0.7)
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(cycbuf-buffer-sort-function 'cycbuf-sort-by-recency)
@@ -25,7 +26,7 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -342,7 +343,7 @@ With argument, do this that many times."
 (global-set-key (kbd "C-S-t") 'hs-hide-all)
 (global-set-key (kbd "C-M-t") 'hs-show-all)
 (global-set-key (kbd "C-b") 'goto-match-paren)
-(global-set-key "\C-s" 'isearch-forward-regexp)
+(global-set-key "\C-s" 'isearch-forward)
 (global-set-key (kbd "M-RET") 'completion-at-point)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key [delete] 'delete-forward-char-and-spaces)
