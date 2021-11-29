@@ -264,7 +264,11 @@ With argument, do this that many times."
 
 (require 'lsp-mode)
 (add-hook 'rust-mode-hook #'lsp-deferred)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'lsp-mode-hook
+	  (lambda ()
+	    (lsp-ui-mode)
+	    (yas-minor-mode)
+	    ))
 
 (add-hook 'rust-mode-hook
 	  (lambda ()
