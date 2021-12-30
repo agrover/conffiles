@@ -31,16 +31,19 @@
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
    '(("gn" . "*.gn *.gni")
-     ("gyp" . "*.gyp *.gypi")
-     ("everything" . "*")
-     ("idl" . "*.idl *.webidl")))
+	 ("gyp" . "*.gyp *.gypi")
+	 ("everything" . "*")
+	 ("idl" . "*.idl *.webidl")))
  '(safe-local-variable-values '((test-case-name . twisted\.test\.test_internet)))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
  '(scroll-conservatively 10000)
  '(scroll-margin 5)
  '(send-mail-function 'mailclient-send-it)
+ '(sentence-end-double-space nil)
+ '(show-paren-delay 0)
  '(show-paren-mode t)
+ '(tab-width 4)
  '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
@@ -80,6 +83,8 @@
 (package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
+(unless package-archive-contents
+  (package-refresh-contents))
 
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
