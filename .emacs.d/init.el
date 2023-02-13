@@ -13,6 +13,7 @@
  '(desktop-save-mode t)
  '(fill-column 80)
  '(global-auto-revert-mode t)
+ '(global-eldoc-mode nil)
  '(indicate-buffer-boundaries 'left)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
@@ -30,7 +31,7 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -160,8 +161,8 @@ With argument, do this that many times."
 
 (defun kill-line-current (times)
   (interactive "p")
-    (beginning-of-visual-line)
-    (kill-line times))
+  (beginning-of-visual-line)
+  (kill-line times))
 
 (defun kill-line-after (times)
   (interactive "p")
@@ -173,8 +174,8 @@ With argument, do this that many times."
   (interactive "p")
   (if (eolp)
       (progn
-	(delete-forward-char arg)
-	(delete-horizontal-space))
+		(delete-forward-char arg)
+		(delete-horizontal-space))
     (delete-forward-char arg)))
 
 (defun other-window-back (times)
@@ -195,19 +196,19 @@ With argument, do this that many times."
    opening parenthesis one level up."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1))
-	(t
-	 (backward-char 1)
-	 (cond ((looking-at "\\s\)")
-		(forward-char 1) (backward-list 1))
-	       (t
-		(while (not (looking-at "\\s("))
-		  (backward-char 1)
-		  (cond ((looking-at "\\s\)")
-			 (message "->> )")
-			 (forward-char 1)
-			 (backward-list 1)
-			 (backward-char 1)))
-		  ))))))
+		(t
+		 (backward-char 1)
+		 (cond ((looking-at "\\s\)")
+				(forward-char 1) (backward-list 1))
+			   (t
+				(while (not (looking-at "\\s("))
+				  (backward-char 1)
+				  (cond ((looking-at "\\s\)")
+						 (message "->> )")
+						 (forward-char 1)
+						 (backward-list 1)
+						 (backward-char 1)))
+				  ))))))
 
 ;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
@@ -216,6 +217,8 @@ With argument, do this that many times."
 (setq diff-switches "-u")
 
 (require 'cycbuf)
+
+(require 'delight)
 
 (require 'ido)
 (ido-mode t)
@@ -253,40 +256,45 @@ With argument, do this that many times."
 ;; org mode settings
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)"  "NEXT(n)" "|" "DONE(d)")
-	      (sequence "REPEAT(r)"  "WAIT(w)"  "|"  "PAUSED(p)" "CANCELLED(c)" )
-	      (sequence "IDEA(i)" "MAYBE(y)" "STAGED(s)" "WORKING(k)" "|" "USED(u)")
-)))
+			  (sequence "REPEAT(r)"  "WAIT(w)"  "|"  "PAUSED(p)" "CANCELLED(c)" )
+			  (sequence "IDEA(i)" "MAYBE(y)" "STAGED(s)" "WORKING(k)" "|" "USED(u)")
+			  )))
 
 (add-hook 'prog-mode-hook
-	  (lambda ()
-	    (hs-minor-mode t)
-	    (visual-line-mode t)
-	    (rainbow-delimiters-mode t)
-	    (set-variable `show-trailing-whitespace t)
-	    ))
+		  (lambda ()
+			(hs-minor-mode t)
+			(delight 'hs-minor-mode nil t)
+			(visual-line-mode t)
+			(rainbow-delimiters-mode t)
+			(set-variable `show-trailing-whitespace t)
+			))
 
 ;; Flycheck for rust
 (add-hook 'flycheck-mode-hook
-	  (lambda ()
-	    (flycheck-rust-setup)
-	    ))
+		  (lambda ()
+			(flycheck-rust-setup)
+			))
 
 (require 'lsp-mode)
 (add-hook 'lsp-mode-hook
-	  (lambda ()
-;;	    (lsp-ui-mode)
-	    (yas-minor-mode)
-	    ))
+		  (lambda ()
+			;;	    (lsp-ui-mode)
+			(yas-minor-mode)
+			(delight 'yas-minor-mode nil t)
+			))
 
 (add-hook 'rust-mode-hook #'lsp-deferred)
 
 (add-hook 'rust-mode-hook
-	  (lambda ()
-	    (flycheck-mode)
-		(prettify-symbols-mode)
-	    (rust-enable-format-on-save)
-	    (setq indent-tabs-mode nil)
-	    ))
+		  (lambda ()
+			(flycheck-mode)
+			(prettify-symbols-mode)
+			(rust-enable-format-on-save)
+			(setq indent-tabs-mode nil)
+			(delight 'eldoc-mode nil "eldoc")
+			(delight 'company-mode nil "company")
+			(delight 'lsp-lens-mode nil "lsp-lens")
+			))
 
 (add-hook
  'rust-mode-hook
@@ -309,17 +317,17 @@ With argument, do this that many times."
  )
 
 (add-hook 'grep-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "M-RET") 'compilation-display-error)
-	    ))
+		  (lambda ()
+			(local-set-key (kbd "M-RET") 'compilation-display-error)
+			))
 
 (add-hook 'org-mode-hook
-	  (lambda ()
-	    (define-key org-mode-map "\M-e" nil)
-	    (flyspell-mode)
-	    (visual-line-mode)
-	    (auto-fill-mode -1)
-	    ))
+		  (lambda ()
+			(define-key org-mode-map "\M-e" nil)
+			(flyspell-mode)
+			(visual-line-mode)
+			(auto-fill-mode -1)
+			))
 
 ;; (add-hook 'c++-mode-hook
 ;; 	  (function (lambda ()
@@ -334,8 +342,8 @@ With argument, do this that many times."
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 (add-hook 'yaml-mode-hook
-	  '(lambda ()
-	     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+		  '(lambda ()
+			 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (require 'move-text)
 
