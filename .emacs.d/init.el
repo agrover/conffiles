@@ -13,21 +13,24 @@
  '(desktop-save-mode t)
  '(fill-column 80)
  '(global-auto-revert-mode t)
- '(global-prettify-symbols-mode t)
  '(indicate-buffer-boundaries 'left)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(isearch-lazy-count t)
  '(kill-whole-line t)
+ '(lsp-rust-analyzer-display-chaining-hints t)
+ '(lsp-rust-analyzer-display-closure-return-type-hints t)
+ '(lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
+ '(lsp-rust-analyzer-display-parameter-hints t)
+ '(lsp-rust-analyzer-display-reborrow-hints "always")
  '(lsp-ui-sideline-enable nil)
  '(make-backup-files nil)
  '(midnight-mode t)
- '(minions-mode t)
  '(org-cycle-emulate-tab nil)
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
  '(rg-custom-type-aliases
@@ -269,16 +272,18 @@ With argument, do this that many times."
 	    ))
 
 (require 'lsp-mode)
-(add-hook 'rust-mode-hook #'lsp-deferred)
 (add-hook 'lsp-mode-hook
 	  (lambda ()
-	    (lsp-ui-mode)
+;;	    (lsp-ui-mode)
 	    (yas-minor-mode)
 	    ))
+
+(add-hook 'rust-mode-hook #'lsp-deferred)
 
 (add-hook 'rust-mode-hook
 	  (lambda ()
 	    (flycheck-mode)
+		(prettify-symbols-mode)
 	    (rust-enable-format-on-save)
 	    (setq indent-tabs-mode nil)
 	    ))
