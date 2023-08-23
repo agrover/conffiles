@@ -19,6 +19,7 @@
  '(inhibit-startup-screen t)
  '(isearch-lazy-count t)
  '(kill-whole-line t)
+ '(lsp-enable-file-watchers nil)
  '(lsp-rust-analyzer-display-chaining-hints t)
  '(lsp-rust-analyzer-display-closure-return-type-hints t)
  '(lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
@@ -31,9 +32,9 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(xref delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
- '(rg-command-line-flags '("--max-columns 1024 --max-count 512"))
+ '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
  '(rg-custom-type-aliases
    '(("gn" . "*.gn *.gni")
 	 ("gyp" . "*.gyp *.gypi")
@@ -49,7 +50,6 @@
  '(show-paren-delay 0)
  '(show-paren-mode t)
  '(tab-width 4)
- '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(tramp-mode t)
@@ -264,7 +264,6 @@ With argument, do this that many times."
 		  (lambda ()
 			(hs-minor-mode t)
 			(delight 'hs-minor-mode nil t)
-			(visual-line-mode t)
 			(rainbow-delimiters-mode t)
 			(set-variable `show-trailing-whitespace t)
 			))
@@ -389,6 +388,7 @@ With argument, do this that many times."
 (global-set-key (kbd "s-n") 'flycheck-next-error)
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C--") 'er/contract-region)
+(global-set-key (kbd "s-r") 'lsp-find-references)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
