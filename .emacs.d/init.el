@@ -34,6 +34,7 @@
  '(package-selected-packages
    '(xref delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
+ '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
  '(rg-custom-type-aliases
    '(("gn" . "*.gn *.gni")
@@ -210,9 +211,18 @@ With argument, do this that many times."
 						 (backward-char 1)))
 				  ))))))
 
+(require 'yaml-mode)
+
+(add-hook 'yaml-mode-hook
+		  (lambda ()
+			(define-key yaml-mode-map "\C-m" 'newline-and-indent)
+			))
+
 ;; use python mode for Cython files
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 (setq diff-switches "-u")
 
@@ -337,13 +347,6 @@ With argument, do this that many times."
 
 (electric-indent-mode -1)
 
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
-(add-hook 'yaml-mode-hook
-		  '(lambda ()
-			 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-
 (require 'move-text)
 
 ;; ins/del lines before/after
@@ -352,6 +355,10 @@ With argument, do this that many times."
 (global-set-key "\C-n" 'kill-line-after)
 (global-set-key "\M-p" 'insert-line-before)
 (global-set-key "\M-n" 'insert-line-after)
+
+; override mode-specific definitions
+(bind-key* "\M-p" 'insert-line-before)
+(bind-key* "\M-n" 'insert-line-after)
 
 ;; cycbuf keys
 (global-set-key (kbd "M-q") 'cycbuf-switch-to-previous-buffer)
