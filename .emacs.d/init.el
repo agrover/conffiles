@@ -25,14 +25,16 @@
  '(lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
  '(lsp-rust-analyzer-display-parameter-hints t)
  '(lsp-rust-analyzer-display-reborrow-hints "always")
- '(lsp-ui-sideline-enable nil)
+ '(lsp-ui-doc-delay 0.7)
  '(make-backup-files nil)
  '(midnight-mode t)
+ '(ns-alternate-modifier 'super)
+ '(ns-command-modifier 'meta)
  '(org-cycle-emulate-tab nil)
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(xref delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(magit ace-window xref delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
@@ -41,7 +43,7 @@
 	 ("gyp" . "*.gyp *.gypi")
 	 ("everything" . "*")
 	 ("idl" . "*.idl *.webidl")))
- '(safe-local-variable-values '((test-case-name . twisted\.test\.test_internet)))
+ '(safe-local-variable-values '((test-case-name . twisted.test.test_internet)))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
  '(scroll-conservatively 10000)
@@ -49,7 +51,6 @@
  '(send-mail-function 'mailclient-send-it)
  '(sentence-end-double-space nil)
  '(show-paren-delay 0)
- '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
@@ -62,7 +63,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 181 :width normal :foundry "PfEd" :family "Inconsolata"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 240 :width normal :foundry "nil" :family "Inconsolata"))))
  '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
@@ -292,7 +293,7 @@ With argument, do this that many times."
 			(delight 'yas-minor-mode nil t)
 			))
 
-(add-hook 'rust-mode-hook #'lsp-deferred)
+;;(add-hook 'rust-mode-hook #'lsp-deferred)
 
 (add-hook 'rust-mode-hook
 		  (lambda ()
@@ -352,6 +353,7 @@ With argument, do this that many times."
 ;; ins/del lines before/after
 (global-set-key "\C-p" 'kill-line-before)
 (global-set-key (kbd "<s-delete>") 'kill-line-current)
+(global-set-key (kbd "s-<kp-delete>") 'kill-line-current)  ;; for macos
 (global-set-key "\C-n" 'kill-line-after)
 (global-set-key "\M-p" 'insert-line-before)
 (global-set-key "\M-n" 'insert-line-after)
@@ -396,6 +398,10 @@ With argument, do this that many times."
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C--") 'er/contract-region)
 (global-set-key (kbd "s-r") 'lsp-find-references)
+
+;; macos bs
+(global-set-key (kbd "<end>") 'end-of-line)
+(global-set-key (kbd "<home>") 'beginning-of-line)
 
 ;; isearch
 (global-set-key "\C-f" 'isearch-forward-symbol-at-point)
