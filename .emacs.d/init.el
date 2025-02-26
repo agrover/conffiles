@@ -34,15 +34,19 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(magit ace-window xref delight jinja2-mode typescript-mode minions strace-mode lua-mode salt-mode use-package lsp-ui yasnippet company clang-format+ expand-region smartparens rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode markdown-mode yaml-mode go-mode clang-format rg move-text multicolumn flycheck-rust ripgrep))
+   '(terraform-mode magit ace-window xref delight jinja2-mode typescript-mode
+					minions strace-mode lua-mode salt-mode use-package lsp-ui
+					yasnippet company clang-format+ expand-region smartparens
+					rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode
+					markdown-mode yaml-mode go-mode clang-format rg move-text
+					multicolumn flycheck-rust ripgrep))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
  '(rg-custom-type-aliases
-   '(("gn" . "*.gn *.gni")
-	 ("gyp" . "*.gyp *.gypi")
-	 ("everything" . "*")
+   '(("gn" . "*.gn *.gni") ("gyp" . "*.gyp *.gypi") ("everything" . "*")
 	 ("idl" . "*.idl *.webidl")))
+ '(rust-rustfmt-switches '("--edition" "2024"))
  '(safe-local-variable-values '((test-case-name . twisted.test.test_internet)))
  '(save-place t nil (saveplace))
  '(save-place-file "~/.emacs.d/saveplace")
@@ -63,7 +67,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 240 :width normal :foundry "nil" :family "Inconsolata"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 98 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
@@ -293,7 +297,7 @@ With argument, do this that many times."
 			(delight 'yas-minor-mode nil t)
 			))
 
-;;(add-hook 'rust-mode-hook #'lsp-deferred)
+(add-hook 'rust-mode-hook #'lsp-deferred)
 
 (add-hook 'rust-mode-hook
 		  (lambda ()
@@ -351,66 +355,66 @@ With argument, do this that many times."
 (require 'move-text)
 
 ;; ins/del lines before/after
-(global-set-key "\C-p" 'kill-line-before)
-(global-set-key (kbd "<s-delete>") 'kill-line-current)
-(global-set-key (kbd "s-<kp-delete>") 'kill-line-current)  ;; for macos
-(global-set-key "\C-n" 'kill-line-after)
-(global-set-key "\M-p" 'insert-line-before)
-(global-set-key "\M-n" 'insert-line-after)
+(keymap-global-set "C-p" 'kill-line-before)
+(keymap-global-set "s-<delete>" 'kill-line-current)
+(keymap-global-set "s-<kp-delete>" 'kill-line-current)  ;; for macos
+(keymap-global-set "C-n" 'kill-line-after)
+(keymap-global-set "M-p" 'insert-line-before)
+(keymap-global-set "M-n" 'insert-line-after)
 
 ; override mode-specific definitions
-(bind-key* "\M-p" 'insert-line-before)
-(bind-key* "\M-n" 'insert-line-after)
+(bind-key* "M-p" 'insert-line-before)
+(bind-key* "M-n" 'insert-line-after)
 
 ;; cycbuf keys
-(global-set-key (kbd "M-q") 'cycbuf-switch-to-previous-buffer)
-(global-set-key (kbd "M-e") 'cycbuf-switch-to-next-buffer)
-(global-set-key (kbd "M-w") 'kill-this-buffer)
+(bind-key* "M-q" 'cycbuf-switch-to-previous-buffer)
+(bind-key* "M-e" 'cycbuf-switch-to-next-buffer)
+(bind-key* "M-w" 'kill-current-buffer)
 
 ;; misc
-(global-set-key "\C-a" 'mark-whole-buffer)
-(global-set-key "\C-o" 'ido-find-file)
-(global-set-key "\C-t" 'hs-toggle-hiding)
-(global-set-key (kbd "C-S-t") 'hs-hide-all)
-(global-set-key (kbd "C-M-t") 'hs-show-all)
-(global-set-key (kbd "C-b") 'goto-match-paren)
-(global-set-key "\C-s" 'isearch-forward)
-(global-set-key (kbd "M-RET") 'completion-at-point)
-(global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key [delete] 'delete-forward-char-and-spaces)
-(global-set-key [backspace] 'backward-delete-char-untabify)
-(global-set-key (kbd "s-d") 'duplicate-line-or-region)
-(global-set-key (kbd "s-e") 'other-window)
-(global-set-key (kbd "s-q") 'other-window-back)
-(global-set-key (kbd "M-<down>") 'scroll-up-line)
-(global-set-key (kbd "M-<up>") 'scroll-down-line)
-(global-set-key (kbd "C-M-b") 'three-balanced-windows)
-(global-set-key (kbd "M-b") 'multicolumn-transpose-windows)
-(global-set-key (kbd "M-c") 'comment-region)
-(global-set-key (kbd "s-c") 'uncomment-region)
-(global-set-key (kbd "s-f") 'fill-region)
-(global-set-key (kbd "C-M-s-<up>") 'move-text-up)
-(global-set-key (kbd "C-M-s-<down>") 'move-text-down)
-(global-set-key (kbd "M-s-t") 'transpose-chars)
-(global-set-key (kbd "<C-backspace>") 'backward-delete-word)
-(global-set-key (kbd "<C-delete>") 'delete-word)
-(global-set-key (kbd "s-n") 'flycheck-next-error)
-(global-set-key (kbd "C-=") 'er/expand-region)
-(global-set-key (kbd "C--") 'er/contract-region)
-(global-set-key (kbd "s-r") 'lsp-find-references)
+(keymap-global-set "C-a" 'mark-whole-buffer)
+(keymap-global-set "C-o" 'ido-find-file)
+(keymap-global-set "C-t" 'hs-toggle-hiding)
+(keymap-global-set "C-S-t" 'hs-hide-all)
+(keymap-global-set "C-M-t" 'hs-show-all)
+(keymap-global-set "C-b" 'goto-match-paren)
+(keymap-global-set "C-s" 'isearch-forward)
+(keymap-global-set "M-RET" 'completion-at-point)
+(keymap-global-set "RET" 'newline-and-indent)
+(keymap-global-set "<delete>" 'delete-forward-char-and-spaces)
+(keymap-global-set "<backspace>" 'backward-delete-char-untabify)
+(keymap-global-set "s-d" 'duplicate-line-or-region)
+(keymap-global-set "s-e" 'other-window)
+(keymap-global-set "s-q" 'other-window-back)
+(keymap-global-set "M-<down>" 'scroll-up-line)
+(keymap-global-set "M-<up>" 'scroll-down-line)
+(keymap-global-set "C-M-b" 'three-balanced-windows)
+(keymap-global-set "M-b" 'multicolumn-transpose-windows)
+(keymap-global-set "M-c" 'comment-region)
+(keymap-global-set "s-c" 'uncomment-region)
+(keymap-global-set "s-f" 'fill-region)
+(keymap-global-set "C-M-s-<up>" 'move-text-up)
+(keymap-global-set "C-M-s-<down>" 'move-text-down)
+(keymap-global-set "M-s-t" 'transpose-chars)
+(keymap-global-set "C-<backspace>" 'backward-delete-word)
+(keymap-global-set "C-<delete>" 'delete-word)
+(keymap-global-set "s-n" 'flycheck-next-error)
+(keymap-global-set "C-=" 'er/expand-region)
+(keymap-global-set "C--" 'er/contract-region)
+(keymap-global-set "s-r" 'lsp-find-references)
 
 ;; macos bs
-(global-set-key (kbd "<end>") 'end-of-line)
-(global-set-key (kbd "<home>") 'beginning-of-line)
+(keymap-global-set "<end>" 'end-of-line)
+(keymap-global-set "<home>" 'beginning-of-line)
 
 ;; isearch
-(global-set-key "\C-f" 'isearch-forward-symbol-at-point)
+(keymap-global-set "C-f" 'isearch-forward-symbol-at-point)
 
 ;; gg keys
-(global-set-key "\M-a" 'rg-dwim)
-(global-set-key "\M-s" 'my-rg-search-all-files)
-(global-set-key "\M-d" 'my-rg-search-all-curdir-files)
-(global-set-key "\M-f" 'my-rg-search-gitdir-files)
+(keymap-global-set "M-a" 'rg-dwim)
+(keymap-global-set "M-s" 'my-rg-search-all-files)
+(keymap-global-set "M-d" 'my-rg-search-all-curdir-files)
+(keymap-global-set "M-f" 'my-rg-search-gitdir-files)
 
 (defun query-replace-in-open-buffers (arg1 arg2)
   "query-replace in open files"
