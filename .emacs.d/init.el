@@ -14,6 +14,7 @@
  '(fill-column 80)
  '(global-auto-revert-mode t)
  '(global-eldoc-mode nil)
+ '(global-font-lock-mode t)
  '(indicate-buffer-boundaries 'left)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
@@ -34,12 +35,12 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(terraform-mode magit ace-window xref delight jinja2-mode typescript-mode
-					minions strace-mode lua-mode salt-mode use-package lsp-ui
-					yasnippet company clang-format+ expand-region smartparens
-					rainbow-delimiters lsp-mode cycbuf dockerfile-mode rust-mode
-					markdown-mode yaml-mode go-mode clang-format rg move-text
-					multicolumn flycheck-rust ripgrep))
+   '(ace-window company cycbuf delight dockerfile-mode ellama
+				expand-region flycheck-rust go-mode gptel jinja2-mode lsp-mode
+				lsp-ui lua-mode magit markdown-mode minions move-text
+				multicolumn rainbow-delimiters rg ripgrep rust-mode salt-mode
+				smartparens strace-mode terraform-mode typescript-mode
+				use-package xref yaml-mode yasnippet))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
@@ -67,7 +68,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 98 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 163 :width normal :foundry "CYRE" :family "Inconsolata"))))
  '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
@@ -343,16 +344,36 @@ With argument, do this that many times."
 			(auto-fill-mode -1)
 			))
 
-;; (add-hook 'c++-mode-hook
-;; 	  (function (lambda ()
-;; 	    (add-hook
-;; 	     `before-save-hook 'clang-format-buffer nil 'local))))
-
-(add-hook 'c-mode-common-hook #'clang-format+-mode)
-
 (electric-indent-mode -1)
 
 (require 'move-text)
+
+(use-package ellama
+  :ensure t
+  :config
+  ;; point to your remote Ollama server
+  (require 'llm-ollama)
+  (setq ellama-provider
+        (make-llm-ollama
+         :host "192.168.1.113"
+         :port 11434
+         :chat-model "deepseek-r1:32b"))
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
+  ;; customize display buffer behaviour
+  ;; see ~(info "(elisp) Buffer Display Action Functions")~
+  (setopt ellama-chat-display-action-function #'display-buffer-full-frame)
+  (setopt ellama-instant-display-action-function #'display-buffer-at-bottom)
+
+  :config
+  ;; show ellama context in header line in all buffers
+  (ellama-context-header-line-global-mode +1)
+  ;; show ellama session id in header line in all buffers
+  ;; (ellama-session-header-line-global-mode +1)
+  ;; handle scrolling events
+  (advice-add 'pixel-scroll-precision :before #'ellama-disable-scroll)
+  (advice-add 'end-of-buffer :after #'ellama-enable-scroll)
+  )  ;; or llama2, codellama, etc.
+
 
 ;; ins/del lines before/after
 (keymap-global-set "C-p" 'kill-line-before)
@@ -384,8 +405,9 @@ With argument, do this that many times."
 (keymap-global-set "<delete>" 'delete-forward-char-and-spaces)
 (keymap-global-set "<backspace>" 'backward-delete-char-untabify)
 (keymap-global-set "s-d" 'duplicate-line-or-region)
-(keymap-global-set "s-e" 'other-window)
 (keymap-global-set "s-q" 'other-window-back)
+(keymap-global-set "s-w" 'ellama-transient-main-menu)
+(keymap-global-set "s-e" 'other-window)
 (keymap-global-set "M-<down>" 'scroll-up-line)
 (keymap-global-set "M-<up>" 'scroll-down-line)
 (keymap-global-set "C-M-b" 'three-balanced-windows)
