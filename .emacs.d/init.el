@@ -35,12 +35,12 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(ace-window company cycbuf delight dockerfile-mode ellama
-				expand-region flycheck-rust go-mode gptel jinja2-mode lsp-mode
-				lsp-ui lua-mode magit markdown-mode minions move-text
-				multicolumn rainbow-delimiters rg ripgrep rust-mode salt-mode
-				smartparens strace-mode terraform-mode typescript-mode
-				use-package xref yaml-mode yasnippet))
+   '(ace-window company copilot cycbuf delight dockerfile-mode ellama expand-region
+				flycheck-rust go-mode gptel jinja2-mode lsp-mode lsp-ui lua-mode
+				magit markdown-mode minions move-text multicolumn
+				rainbow-delimiters rg ripgrep rust-mode salt-mode smartparens
+				strace-mode terraform-mode typescript-mode use-package xref
+				yaml-mode yasnippet))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
@@ -424,6 +424,11 @@ With argument, do this that many times."
 (keymap-global-set "C-=" 'er/expand-region)
 (keymap-global-set "C--" 'er/contract-region)
 (keymap-global-set "s-r" 'lsp-find-references)
+(keymap-global-set "s-z" 'copilot-mode)
+(keymap-global-set "C-S-n" 'copilot-next-completion)
+(keymap-global-set "C-S-p" 'copilot-previous-completion)
+(keymap-global-set "C-S-a" 'copilot-accept-completion)
+(keymap-global-set "C-S-<right>" 'copilot-accept-completion-by-word)
 
 ;; macos bs
 (keymap-global-set "<end>" 'end-of-line)
