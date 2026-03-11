@@ -7,6 +7,7 @@
  '(backward-delete-char-untabify-method 'hungry)
  '(column-number-mode t)
  '(company-idle-delay 0.7)
+ '(copilot-max-char 1000000)
  '(cua-keep-region-after-copy t)
  '(cua-mode t nil (cua-base))
  '(cycbuf-buffer-sort-function 'cycbuf-sort-by-recency)
@@ -56,7 +57,7 @@
  '(send-mail-function 'mailclient-send-it)
  '(sentence-end-double-space nil)
  '(show-paren-delay 0)
- '(tab-width 4)
+ '(tab-width 8)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(tramp-mode t)
@@ -94,7 +95,7 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (unless package-archive-contents
   (package-refresh-contents))
 
