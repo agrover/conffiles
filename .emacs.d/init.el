@@ -1,88 +1,5 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(auto-save-default nil)
- '(backward-delete-char-untabify-method 'hungry)
- '(column-number-mode t)
- '(company-idle-delay 0.7)
- '(copilot-max-char 1000000)
- '(cua-keep-region-after-copy t)
- '(cua-mode t nil (cua-base))
- '(cycbuf-buffer-sort-function 'cycbuf-sort-by-recency)
- '(desktop-save-mode t)
- '(fill-column 80)
- '(global-auto-revert-mode t)
- '(global-eldoc-mode nil)
- '(global-font-lock-mode t)
- '(indicate-buffer-boundaries 'left)
- '(indicate-empty-lines t)
- '(inhibit-startup-screen t)
- '(isearch-lazy-count t)
- '(kill-whole-line t)
- '(lsp-enable-file-watchers nil)
- '(lsp-rust-analyzer-display-chaining-hints t)
- '(lsp-rust-analyzer-display-closure-return-type-hints t)
- '(lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
- '(lsp-rust-analyzer-display-parameter-hints t)
- '(lsp-rust-analyzer-display-reborrow-hints "always")
- '(lsp-ui-doc-delay 0.7)
- '(make-backup-files nil)
- '(midnight-mode t)
- '(ns-alternate-modifier 'super)
- '(ns-command-modifier 'meta)
- '(org-cycle-emulate-tab nil)
- '(org-replace-disputed-keys t)
- '(org-support-shift-select t)
- '(package-selected-packages
-   '(ace-window company copilot cycbuf delight dockerfile-mode ellama expand-region
-				flycheck-rust go-mode gptel jinja2-mode lsp-mode lsp-ui lua-mode
-				magit markdown-mode minions move-text multicolumn
-				rainbow-delimiters rg ripgrep rust-mode salt-mode smartparens
-				strace-mode terraform-mode typescript-mode use-package xref
-				yaml-mode yasnippet))
- '(prettify-symbols-unprettify-at-point 'right-edge)
- '(python-indent-offset 4)
- '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
- '(rg-custom-type-aliases
-   '(("gn" . "*.gn *.gni") ("gyp" . "*.gyp *.gypi") ("everything" . "*")
-	 ("idl" . "*.idl *.webidl")))
- '(rust-rustfmt-switches '("--edition" "2024"))
- '(safe-local-variable-values '((test-case-name . twisted.test.test_internet)))
- '(save-place t nil (saveplace))
- '(save-place-file "~/.emacs.d/saveplace")
- '(scroll-conservatively 10000)
- '(scroll-margin 5)
- '(send-mail-function 'mailclient-send-it)
- '(sentence-end-double-space nil)
- '(show-paren-delay 0)
- '(tab-width 8)
- '(tool-bar-mode nil)
- '(tramp-default-method "ssh")
- '(tramp-mode t)
- '(uniquify-buffer-name-style 'forward nil (uniquify))
- '(user-mail-address "andy@groveronline.com")
- '(visual-line-fringe-indicators '(left-curly-arrow nil)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 163 :width normal :foundry "CYRE" :family "Inconsolata"))))
- '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
- '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
- '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
- '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "white"))))
- '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "deep sky blue"))))
- '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "yellow"))))
- '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-base-face :foreground "burlywood"))))
- '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-base-face :foreground "medium sea green"))))
- '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-base-face :foreground "blue violet"))))
- '(rainbow-delimiters-depth-7-face ((t (:inherit rainbow-delimiters-base-face :foreground "khaki"))))
- '(rainbow-delimiters-depth-8-face ((t (:inherit rainbow-delimiters-base-face :foreground "green1"))))
- '(rainbow-delimiters-depth-9-face ((t (:inherit rainbow-delimiters-base-face :foreground "light sea green"))))
- '(rust-question-mark ((t (:inherit font-lock-builtin-face :foreground "orange red" :weight bold)))))
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (setq grep-highlight-matches t)
@@ -90,12 +7,10 @@
 (setq read-buffer-completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -188,8 +103,7 @@ With argument, do this that many times."
 
 (defun other-window-back (times)
   (interactive "p")
-  (other-window (- times))
-  )
+  (other-window (- times)))
 
 (defun three-balanced-windows ()
   "Make three equal-width windows"
@@ -233,7 +147,12 @@ With argument, do this that many times."
 
 (setq diff-switches "-u")
 
-(require 'cycbuf)
+(use-package cycbuf
+  :ensure t
+  :bind* (("M-q" . cycbuf-switch-to-previous-buffer)
+          ("M-e" . cycbuf-switch-to-next-buffer)
+	  ("M-w" . kill-current-buffer)
+	  ))
 
 (require 'delight)
 
@@ -243,7 +162,9 @@ With argument, do this that many times."
 
 (require 'uniquify)
 
-(require 'expand-region)
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)
+         ("C--" . er/contract-region)))
 
 ;; custom ripgrep search params
 (rg-define-search my-rg-search-all-files
@@ -282,7 +203,7 @@ With argument, do this that many times."
 			(hs-minor-mode t)
 			(delight 'hs-minor-mode nil t)
 			(rainbow-delimiters-mode t)
-			(set-variable `show-trailing-whitespace t)
+			(set-variable 'show-trailing-whitespace t)
 			))
 
 ;; Flycheck for rust
@@ -291,15 +212,15 @@ With argument, do this that many times."
 			(flycheck-rust-setup)
 			))
 
-(require 'lsp-mode)
-(add-hook 'lsp-mode-hook
-		  (lambda ()
-			;;	    (lsp-ui-mode)
-			(yas-minor-mode)
-			(delight 'yas-minor-mode nil t)
-			))
-
-(add-hook 'rust-mode-hook #'lsp-deferred)
+(use-package lsp-mode
+  :ensure t
+  :hook (rust-mode . lsp-deferred)
+  :config
+  (add-hook 'lsp-mode-hook
+            (lambda ()
+	      ;;	    (lsp-ui-mode)
+              (yas-minor-mode)
+              (delight 'yas-minor-mode nil t))))
 
 (add-hook 'rust-mode-hook
 		  (lambda ()
@@ -310,27 +231,19 @@ With argument, do this that many times."
 			(delight 'eldoc-mode nil "eldoc")
 			(delight 'company-mode nil "company")
 			(delight 'lsp-lens-mode nil "lsp-lens")
-			))
-
-(add-hook
- 'rust-mode-hook
- (lambda ()
-   (setq
-    prettify-symbols-alist
-    '(
-      ("fn"         . ?ƒ)
-      ("Fn"         . ?𝘍)
-      ;; ("->"         . ?→)
-      ;; ("=>"         . ?⇒)
-      ;; (".."         . ?‥)
-      ;; ("..."        . ?…)
-
-      ;; ("*"          . ?×)
-      ;; ("/"          . ?÷)
-      )
-    )
-   )
- )
+			(setq
+			 prettify-symbols-alist
+			 '(
+			   ("fn"         . ?ƒ)
+			   ("Fn"         . ?𝘍)
+			   ;; ("->"         . ?→)
+			   ;; ("=>"         . ?⇒)
+			   ;; (".."         . ?‥)
+			   ;; ("..."        . ?…)
+			   ;; ("*"          . ?×)
+			   ;; ("/"          . ?÷)
+			   )
+			 )))
 
 (add-hook 'grep-mode-hook
 		  (lambda ()
@@ -349,32 +262,12 @@ With argument, do this that many times."
 
 (require 'move-text)
 
-(use-package ellama
-  :ensure t
-  :config
-  ;; point to your remote Ollama server
-  (require 'llm-ollama)
-  (setq ellama-provider
-        (make-llm-ollama
-         :host "192.168.1.113"
-         :port 11434
-         :chat-model "deepseek-r1:32b"))
-  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-  ;; customize display buffer behaviour
-  ;; see ~(info "(elisp) Buffer Display Action Functions")~
-  (setopt ellama-chat-display-action-function #'display-buffer-full-frame)
-  (setopt ellama-instant-display-action-function #'display-buffer-at-bottom)
-
-  :config
-  ;; show ellama context in header line in all buffers
-  (ellama-context-header-line-global-mode +1)
-  ;; show ellama session id in header line in all buffers
-  ;; (ellama-session-header-line-global-mode +1)
-  ;; handle scrolling events
-  (advice-add 'pixel-scroll-precision :before #'ellama-disable-scroll)
-  (advice-add 'end-of-buffer :after #'ellama-enable-scroll)
-  )  ;; or llama2, codellama, etc.
-
+(use-package copilot
+  :bind (("s-z"       . copilot-mode)
+         ("C-S-n"     . copilot-next-completion)
+         ("C-S-p"     . copilot-previous-completion)
+         ("C-S-a"     . copilot-accept-completion)
+         ("C-S-<right>" . copilot-accept-completion-by-word)))
 
 ;; ins/del lines before/after
 (keymap-global-set "C-p" 'kill-line-before)
@@ -422,14 +315,7 @@ With argument, do this that many times."
 (keymap-global-set "C-<backspace>" 'backward-delete-word)
 (keymap-global-set "C-<delete>" 'delete-word)
 (keymap-global-set "s-n" 'flycheck-next-error)
-(keymap-global-set "C-=" 'er/expand-region)
-(keymap-global-set "C--" 'er/contract-region)
 (keymap-global-set "s-r" 'lsp-find-references)
-(keymap-global-set "s-z" 'copilot-mode)
-(keymap-global-set "C-S-n" 'copilot-next-completion)
-(keymap-global-set "C-S-p" 'copilot-previous-completion)
-(keymap-global-set "C-S-a" 'copilot-accept-completion)
-(keymap-global-set "C-S-<right>" 'copilot-accept-completion-by-word)
 
 ;; macos bs
 (keymap-global-set "<end>" 'end-of-line)
@@ -444,18 +330,13 @@ With argument, do this that many times."
 (keymap-global-set "M-d" 'my-rg-search-all-curdir-files)
 (keymap-global-set "M-f" 'my-rg-search-gitdir-files)
 
-(defun query-replace-in-open-buffers (arg1 arg2)
-  "query-replace in open files"
-  (interactive "sQuery Replace in open Buffers: \nswith: ")
-  (mapcar
-   (lambda (x)
-     (find-file x)
-     (save-excursion
-       (beginning-of-buffer)
-       (query-replace arg1 arg2)))
-   (delq
-    nil
-    (mapcar
-     (lambda (x)
-       (buffer-file-name x))
-     (buffer-list)))))
+(defun query-replace-in-open-buffers (from to)
+  "Run `query-replace' for FROM → TO across all file-visiting buffers."
+  (interactive "sQuery replace: \nsWith: ")
+  (cl-loop for buf in (buffer-list)
+           when (buffer-file-name buf)
+           do (with-current-buffer buf
+                (save-excursion
+                  (save-match-data
+                    (goto-char (point-min))
+                    (query-replace from to))))))
