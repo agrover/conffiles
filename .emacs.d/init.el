@@ -27,24 +27,23 @@
       '((c-mode . "linux") (other . "gnu")))
 
 (defun duplicate-line-or-region (arg)
-  "Duplicates the current line or region ARG times.
-If there's no region, the current line will be duplicated. However, if
-there's a region, all lines that region covers will be duplicated."
+  "Duplicate the current line or region ARG times.
+If there's no active region, duplicate the current line. If there's
+a region, all lines that region covers will be duplicated."
   (interactive "p")
-  (let (beg end (origin (point)))
-    (if (and mark-active (> (point) (mark)))
-        (exchange-point-and-mark))
-    (setq beg (line-beginning-position))
-    (if mark-active
-        (exchange-point-and-mark))
-    (setq end (line-end-position))
-    (let ((region (buffer-substring-no-properties beg end)))
-      (dotimes (i arg)
-        (goto-char end)
-        (newline)
-        (insert region)
-        (setq end (point)))
-      (goto-char (+ origin (* (length region) arg) arg)))))
+  (let* ((beg (save-excursion
+                (when (use-region-p) (goto-char (region-beginning)))
+                (line-beginning-position)))
+         (end (save-excursion
+                (when (use-region-p) (goto-char (region-end)))
+                (line-end-position)))
+         (offset (- (point) beg))
+         (region (buffer-substring-no-properties beg end)))
+    (goto-char end)
+    (dotimes (_ arg)
+      (newline)
+      (insert region))
+    (goto-char (- (point) (- (length region) offset)))))
 
 (defun delete-word (arg)
   "Delete characters forward until encountering the end of a word.
@@ -264,10 +263,10 @@ With argument, do this that many times."
 
 (use-package copilot
   :bind (("s-z"       . copilot-mode)
-         ("C-S-n"     . copilot-next-completion)
-         ("C-S-p"     . copilot-previous-completion)
-         ("C-S-a"     . copilot-accept-completion)
-         ("C-S-<right>" . copilot-accept-completion-by-word)))
+         ("C-s-n"     . copilot-next-completion)
+         ("C-s-p"     . copilot-previous-completion)
+         ("C-s-a"     . copilot-accept-completion)
+         ("C-s-<right>" . copilot-accept-completion-by-word)))
 
 ;; ins/del lines before/after
 (keymap-global-set "C-p" 'kill-line-before)

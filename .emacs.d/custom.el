@@ -36,10 +36,11 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(ace-window company copilot cycbuf delight dockerfile-mode ellama expand-region
+   '(ace-window company copilot cycbuf delight dockerfile-mode expand-region
 		flycheck-rust gptel lsp-mode lsp-ui magit markdown-mode minions
 		move-text multicolumn rainbow-delimiters rg ripgrep rust-mode
-		smartparens strace-mode use-package xref yaml-mode yasnippet))
+		smartparens strace-mode unidecode use-package xref yaml-mode
+		yasnippet))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
  '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
