@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,14 +37,14 @@
  '(org-replace-disputed-keys t)
  '(org-support-shift-select t)
  '(package-selected-packages
-   '(ace-window company copilot cycbuf delight dockerfile-mode expand-region
-		flycheck-rust gptel lsp-mode lsp-ui magit markdown-mode minions
-		move-text multicolumn rainbow-delimiters rg ripgrep rust-mode
-		smartparens strace-mode unidecode use-package xref yaml-mode
-		yasnippet))
+   '(company copilot cycbuf delight dockerfile-mode expand-region flycheck-rust
+	     lsp-mode lsp-ui magit markdown-mode minions move-text multicolumn
+	     rainbow-delimiters rg rust-mode smartparens strace-mode swift-mode
+	     unidecode use-package xref yaml-mode yasnippet))
  '(prettify-symbols-unprettify-at-point 'right-edge)
  '(python-indent-offset 4)
- '(rg-command-line-flags '("--max-columns 1024 --max-count 512 -g '!submodules'"))
+ '(rg-command-line-flags
+   '("--max-columns 1024 --max-count 512 -g '!submodules' -g '!.cache' --hidden"))
  '(rg-custom-type-aliases
    '(("gn" . "*.gn *.gni") ("gyp" . "*.gyp *.gypi") ("everything" . "*")
      ("idl" . "*.idl *.webidl")))
@@ -59,7 +60,7 @@
  '(tab-width 8)
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
- '(tramp-mode t)
+ '(tramp-mode t t)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
  '(use-short-answers t)
  '(user-mail-address "andy@groveronline.com")
@@ -72,6 +73,7 @@
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 163 :width normal :foundry "CYRE" :family "Inconsolata"))))
  '(cycbuf-current-face ((t (:background "gray41" :weight bold))))
  '(cycbuf-header-face ((t (:foreground "DodgerBlue1" :weight bold))))
+ '(mode-line ((t (:background "light gray" :foreground "black" :box (:line-width (1 . -1) :style released-button)))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
  '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "white"))))
  '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "deep sky blue"))))

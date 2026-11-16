@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
@@ -105,12 +106,16 @@ With argument, do this that many times."
   (other-window (- times)))
 
 (defun three-balanced-windows ()
-  "Make three equal-width windows"
+  "Show the three most recently used buffers in equal-width windows."
   (interactive)
-  (delete-other-windows)
-  (split-window-right)
-  (split-window-right)
-  (balance-windows))
+  (let ((buffers (buffer-list)))
+    (delete-other-windows)
+    (split-window-right)
+    (split-window-right)
+    (balance-windows)
+    (dolist (window (window-list))
+      (when buffers
+        (set-window-buffer window (pop buffers))))))
 
 (defun goto-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis. Else go to the
