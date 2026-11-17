@@ -106,16 +106,26 @@ With argument, do this that many times."
   (other-window (- times)))
 
 (defun three-balanced-windows ()
-  "Show the three most recently used buffers in equal-width windows."
+  "Show the three most recently used files in equal-width windows.
+The current buffer is always kept, even when it does not visit a file.
+If fewer than three candidates exist, no extra windows are created."
   (interactive)
-  (let ((buffers (buffer-list)))
+  (require 'seq)
+  (let* ((current (current-buffer))
+         (others (seq-filter (lambda (buf)
+                               (and (buffer-file-name buf)
+                                    (not (eq buf current))))
+                             (buffer-list)))
+         (buffers (seq-take (cons current others) 3)))
     (delete-other-windows)
-    (split-window-right)
-    (split-window-right)
-    (balance-windows)
+    (dotimes (_ (1- (length buffers)))
+      (condition-case nil
+          (split-window-right)
+        (error nil)))
     (dolist (window (window-list))
-      (when buffers
-        (set-window-buffer window (pop buffers))))))
+      (when (and buffers (not (window-dedicated-p window)))
+        (set-window-buffer window (pop buffers))))
+    (balance-windows)))
 
 (defun goto-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis. Else go to the
