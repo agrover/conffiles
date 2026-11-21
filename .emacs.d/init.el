@@ -239,7 +239,6 @@ If fewer than three candidates exist, no extra windows are created."
 (add-hook 'rust-mode-hook
 		  (lambda ()
 			(flycheck-mode)
-			(prettify-symbols-mode)
 			(rust-enable-format-on-save)
 			(setq indent-tabs-mode nil)
 			(delight 'eldoc-mode nil "eldoc")
@@ -248,16 +247,17 @@ If fewer than three candidates exist, no extra windows are created."
 			(setq
 			 prettify-symbols-alist
 			 '(
-			   ("fn"         . ?ƒ)
-			   ("Fn"         . ?𝘍)
-			   ;; ("->"         . ?→)
-			   ;; ("=>"         . ?⇒)
-			   ;; (".."         . ?‥)
-			   ;; ("..."        . ?…)
-			   ;; ("*"          . ?×)
-			   ;; ("/"          . ?÷)
+			   ("fn" . ?ƒ)
+			   ("Fn" . ?𝘍)
+			   ("->" . ?→)
+			   ("=>" . ?⇒)
+			   ("<=" . ?≤)
+			   (">=" . ?≥)
+			   ("!=" . ?≠)
 			   )
-			 )))
+			 )
+			(prettify-symbols-mode)
+			))
 
 (add-hook 'grep-mode-hook
 		  (lambda ()
